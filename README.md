@@ -63,7 +63,9 @@ Rafaela possui um negócio de festas infantis. Ela precisa controlar os aluguéi
 	- porcentagem máxima de desconto
 
 	5.1. Para cada aluguel realizado por um cliente (a partir do primeiro), deverá ser calculado um valor de desconto.
+   
 	5.2. O valor deverá ser calculado pela fórmula: (quantidade de aluguéis concluídos do cliente * porcentagem de desconto).
+   
 	5.3. As porcentagens deverão ser configuradas à partir de um botão da tela principal.
 ---
 
