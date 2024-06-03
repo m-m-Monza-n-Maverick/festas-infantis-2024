@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FestasInfantis.WinApp.Cliente">
+    <Position X="1" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAACAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Cliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FestasInfantis.WinApp.Tema">
+    <Position X="3.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAEAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Tema.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Itens" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FestasInfantis.WinApp.Itens">
+    <Position X="6" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAEAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Itens.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Tema" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FestasInfantis.WinApp.Aluguel">
+    <Position X="3.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAEAAAQAAEAAACAAAAAAgAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Aluguel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Cliente" />
+      <Property Name="Tema" />
+      <Property Name="Festa" />
+      <Property Name="PorcentDesconto" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FestasInfantis.WinApp.Festa">
+    <Position X="6" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAEAAAAABAAAAAAAAAAEAA=</HashCode>
+      <FileName>Festa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FestasInfantis.WinApp.ControleDesconto">
+    <Position X="3.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ControleDesconto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
