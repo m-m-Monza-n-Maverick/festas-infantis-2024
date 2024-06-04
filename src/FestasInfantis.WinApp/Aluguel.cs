@@ -31,14 +31,6 @@ namespace FestasInfantis.WinApp
             }
         }
 
-        public ControleDesconto PorcentDesconto
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
         public System.DateTime DataPagam
         {
             get => default;
@@ -56,6 +48,14 @@ namespace FestasInfantis.WinApp
         }
 
         public Festa Festa
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public int PorcentDesconto
         {
             get => default;
             set
