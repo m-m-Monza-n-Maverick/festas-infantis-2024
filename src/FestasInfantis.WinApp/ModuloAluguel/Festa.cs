@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FestasInfantis.WinApp
+namespace FestasInfantis.WinApp.ModuloAluguel
 {
     public class Festa
     {
@@ -15,7 +15,7 @@ namespace FestasInfantis.WinApp
             }
         }
 
-        public System.DateTime Data
+        public DateTime Data
         {
             get => default;
             set
@@ -23,7 +23,7 @@ namespace FestasInfantis.WinApp
             }
         }
 
-        public System.TimeSpan HoraInicio
+        public TimeSpan HoraInicio
         {
             get => default;
             set
@@ -31,7 +31,7 @@ namespace FestasInfantis.WinApp
             }
         }
 
-        public System.TimeSpan HoraFim
+        public TimeSpan HoraFim
         {
             get => default;
             set
