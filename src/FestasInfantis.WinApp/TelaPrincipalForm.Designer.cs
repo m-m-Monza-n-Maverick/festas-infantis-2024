@@ -30,6 +30,10 @@
         {
             menuStrip1 = new MenuStrip();
             cadastrosToolStripMenuItem = new ToolStripMenuItem();
+            clientesMenuItem = new ToolStripMenuItem();
+            temasMenuItem = new ToolStripMenuItem();
+            itensToolStripMenuItem = new ToolStripMenuItem();
+            alugueisMenuItem = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             statusLabelPrincipal = new ToolStripStatusLabel();
             toolStrip1 = new ToolStrip();
@@ -47,10 +51,6 @@
             toolStripSeparator4 = new ToolStripSeparator();
             lblTipoCadastro = new ToolStripLabel();
             pnlRegistros = new Panel();
-            clientesMenuItem = new ToolStripMenuItem();
-            temasMenuItem = new ToolStripMenuItem();
-            itensToolStripMenuItem = new ToolStripMenuItem();
-            alugueisMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -72,6 +72,34 @@
             cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
             cadastrosToolStripMenuItem.Size = new Size(86, 24);
             cadastrosToolStripMenuItem.Text = "Cadastros";
+            // 
+            // clientesMenuItem
+            // 
+            clientesMenuItem.Name = "clientesMenuItem";
+            clientesMenuItem.Size = new Size(180, 24);
+            clientesMenuItem.Text = "Clientes";
+            // 
+            // temasMenuItem
+            // 
+            temasMenuItem.DropDownItems.AddRange(new ToolStripItem[] { itensToolStripMenuItem });
+            temasMenuItem.Name = "temasMenuItem";
+            temasMenuItem.Size = new Size(180, 24);
+            temasMenuItem.Text = "Temas";
+            temasMenuItem.Click += temasMenuItem_Click;
+            // 
+            // itensToolStripMenuItem
+            // 
+            itensToolStripMenuItem.Name = "itensToolStripMenuItem";
+            itensToolStripMenuItem.Size = new Size(180, 24);
+            itensToolStripMenuItem.Text = "Itens";
+            itensToolStripMenuItem.Click += itensToolStripMenuItem_Click;
+            // 
+            // alugueisMenuItem
+            // 
+            alugueisMenuItem.Name = "alugueisMenuItem";
+            alugueisMenuItem.Size = new Size(180, 24);
+            alugueisMenuItem.Text = "Aluguéis";
+            alugueisMenuItem.Click += alugueisMenuItem_Click;
             // 
             // statusStrip1
             // 
@@ -108,6 +136,7 @@
             btnAdicionar.Name = "btnAdicionar";
             btnAdicionar.Padding = new Padding(5);
             btnAdicionar.Size = new Size(38, 38);
+            btnAdicionar.Click += btnAdicionar_Click;
             // 
             // btnEditar
             // 
@@ -119,6 +148,7 @@
             btnEditar.Name = "btnEditar";
             btnEditar.Padding = new Padding(5);
             btnEditar.Size = new Size(38, 38);
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnExcluir
             // 
@@ -130,6 +160,7 @@
             btnExcluir.Name = "btnExcluir";
             btnExcluir.Padding = new Padding(5);
             btnExcluir.Size = new Size(38, 38);
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // toolStripSeparator1
             // 
@@ -220,31 +251,6 @@
             pnlRegistros.Name = "pnlRegistros";
             pnlRegistros.Size = new Size(800, 356);
             pnlRegistros.TabIndex = 3;
-            // 
-            // clientesMenuItem
-            // 
-            clientesMenuItem.Name = "clientesMenuItem";
-            clientesMenuItem.Size = new Size(180, 24);
-            clientesMenuItem.Text = "Clientes";
-            // 
-            // temasMenuItem
-            // 
-            temasMenuItem.DropDownItems.AddRange(new ToolStripItem[] { itensToolStripMenuItem });
-            temasMenuItem.Name = "temasMenuItem";
-            temasMenuItem.Size = new Size(180, 24);
-            temasMenuItem.Text = "Temas";
-            // 
-            // itensToolStripMenuItem
-            // 
-            itensToolStripMenuItem.Name = "itensToolStripMenuItem";
-            itensToolStripMenuItem.Size = new Size(180, 24);
-            itensToolStripMenuItem.Text = "Itens";
-            // 
-            // alugueisMenuItem
-            // 
-            alugueisMenuItem.Name = "alugueisMenuItem";
-            alugueisMenuItem.Size = new Size(180, 24);
-            alugueisMenuItem.Text = "Aluguéis";
             // 
             // TelaPrincipalForm
             // 

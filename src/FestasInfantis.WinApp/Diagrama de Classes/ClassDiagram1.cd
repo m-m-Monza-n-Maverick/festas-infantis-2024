@@ -13,9 +13,6 @@
       <HashCode>AAAAAAAAAAAAEAAAAAAAAAAEAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Tema.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Itens" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="FestasInfantis.WinApp.Itens">
     <Position X="6" Y="0.75" Width="1.5" />
@@ -37,7 +34,6 @@
       <Property Name="Cliente" />
       <Property Name="Tema" />
       <Property Name="Festa" />
-      <Property Name="PorcentDesconto" />
     </ShowAsAssociation>
   </Class>
   <Class Name="FestasInfantis.WinApp.Festa">

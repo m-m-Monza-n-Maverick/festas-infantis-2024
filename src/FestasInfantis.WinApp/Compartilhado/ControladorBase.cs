@@ -1,4 +1,7 @@
-﻿namespace eAgenda.WinApp.Compartilhado
+﻿using eAgenda.ConsoleApp.Compartilhado;
+using FestasInfantis.WinApp;
+
+namespace eAgenda.WinApp.Compartilhado
 {
     public abstract class ControladorBase
     {
@@ -13,5 +16,20 @@
         public abstract void Adicionar();
         public abstract void Editar();
         public abstract void Excluir();
+
+        public bool SemSeleção(EntidadeBase entidadeSelecionada)
+        {
+            if (entidadeSelecionada == null)
+            {
+                MessageBox.Show(
+                    "Não é possível realizar esta ação sem um registro selecionado.",
+                    "Aviso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return true;
+            }
+            return false;
+        }
     }
 }
