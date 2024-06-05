@@ -49,7 +49,7 @@
             btnCancelar.Location = new Point(12, 213);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(75, 23);
-            btnCancelar.TabIndex = 1;
+            btnCancelar.TabIndex = 3;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             // 
@@ -59,7 +59,7 @@
             btnGravar.Location = new Point(353, 213);
             btnGravar.Name = "btnGravar";
             btnGravar.Size = new Size(75, 23);
-            btnGravar.TabIndex = 2;
+            btnGravar.TabIndex = 4;
             btnGravar.Text = "Gravar";
             btnGravar.UseVisualStyleBackColor = true;
             btnGravar.Click += btnGravar_Click;
@@ -72,7 +72,7 @@
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(420, 189);
-            tabControl1.TabIndex = 2;
+            tabControl1.TabIndex = 1;
             // 
             // tabPage1
             // 
@@ -140,7 +140,7 @@
             listSelecaoItens.Location = new Point(3, 3);
             listSelecaoItens.Name = "listSelecaoItens";
             listSelecaoItens.Size = new Size(406, 155);
-            listSelecaoItens.TabIndex = 0;
+            listSelecaoItens.TabIndex = 2;
             // 
             // TelaTemaForm
             // 
@@ -151,8 +151,10 @@
             Controls.Add(btnGravar);
             Controls.Add(btnCancelar);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "TelaTemaForm";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Cadastro de Temas";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);

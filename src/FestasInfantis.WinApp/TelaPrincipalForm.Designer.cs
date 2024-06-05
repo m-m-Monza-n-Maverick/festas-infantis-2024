@@ -43,8 +43,6 @@
             toolStripSeparator1 = new ToolStripSeparator();
             btnFiltrar = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
-            btnAdicionarItens = new ToolStripButton();
-            toolStripSeparator2 = new ToolStripSeparator();
             btnVisualizarAlugueis = new ToolStripButton();
             btnConcluirAluguel = new ToolStripButton();
             btnConfigurarDescontos = new ToolStripButton();
@@ -76,7 +74,7 @@
             // clientesMenuItem
             // 
             clientesMenuItem.Name = "clientesMenuItem";
-            clientesMenuItem.Size = new Size(180, 24);
+            clientesMenuItem.Size = new Size(135, 24);
             clientesMenuItem.Text = "Clientes";
             clientesMenuItem.Click += clientesMenuItem_Click;
             // 
@@ -84,7 +82,7 @@
             // 
             temasMenuItem.DropDownItems.AddRange(new ToolStripItem[] { itensToolStripMenuItem });
             temasMenuItem.Name = "temasMenuItem";
-            temasMenuItem.Size = new Size(180, 24);
+            temasMenuItem.Size = new Size(135, 24);
             temasMenuItem.Text = "Temas";
             temasMenuItem.Click += temasMenuItem_Click;
             // 
@@ -98,7 +96,7 @@
             // alugueisMenuItem
             // 
             alugueisMenuItem.Name = "alugueisMenuItem";
-            alugueisMenuItem.Size = new Size(180, 24);
+            alugueisMenuItem.Size = new Size(135, 24);
             alugueisMenuItem.Text = "Aluguéis";
             alugueisMenuItem.Click += alugueisMenuItem_Click;
             // 
@@ -120,7 +118,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnAdicionar, btnEditar, btnExcluir, toolStripSeparator1, btnFiltrar, toolStripSeparator3, btnAdicionarItens, toolStripSeparator2, btnVisualizarAlugueis, btnConcluirAluguel, btnConfigurarDescontos, toolStripSeparator4, lblTipoCadastro });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnAdicionar, btnEditar, btnExcluir, toolStripSeparator1, btnFiltrar, toolStripSeparator3, btnVisualizarAlugueis, btnConcluirAluguel, btnConfigurarDescontos, toolStripSeparator4, lblTipoCadastro });
             toolStrip1.Location = new Point(0, 28);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(800, 41);
@@ -183,22 +181,6 @@
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
             toolStripSeparator3.Size = new Size(6, 41);
-            // 
-            // btnAdicionarItens
-            // 
-            btnAdicionarItens.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnAdicionarItens.Enabled = false;
-            btnAdicionarItens.Image = Properties.Resources.btnAdicionarItens;
-            btnAdicionarItens.ImageScaling = ToolStripItemImageScaling.None;
-            btnAdicionarItens.ImageTransparentColor = Color.Magenta;
-            btnAdicionarItens.Name = "btnAdicionarItens";
-            btnAdicionarItens.Padding = new Padding(5);
-            btnAdicionarItens.Size = new Size(38, 38);
-            // 
-            // toolStripSeparator2
-            // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(6, 41);
             // 
             // btnVisualizarAlugueis
             // 
@@ -292,10 +274,8 @@
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripLabel lblTipoCadastro;
         private ToolStripButton btnVisualizarAlugueis;
-        private ToolStripSeparator toolStripSeparator2;
         private ToolStripButton btnFiltrar;
         private ToolStripSeparator toolStripSeparator3;
-        private ToolStripButton btnAdicionarItens;
         private ToolStripButton btnConcluirAluguel;
         private ToolStripButton btnConfigurarDescontos;
         private ToolStripSeparator toolStripSeparator4;
