@@ -33,7 +33,7 @@ namespace FestasInfantis.WinApp
         private void itensToolStripMenuItem_Click(object sender, EventArgs e)
             => SelecionaModulo(ref controlador, () => controlador = new ControladorItem(repositorioItem));
         private void alugueisMenuItem_Click(object sender, EventArgs e)
-            => SelecionaModulo(ref controlador, () => controlador = new ControladorAluguel(repositorioAluguel));
+            => SelecionaModulo(ref controlador, () => controlador = new ControladorAluguel(repositorioAluguel, repositorioTema));
 
 
         private void btnAdicionar_Click(object sender, EventArgs e)

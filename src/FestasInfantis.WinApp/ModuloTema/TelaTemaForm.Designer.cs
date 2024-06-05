@@ -72,7 +72,7 @@
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(420, 189);
-            tabControl1.TabIndex = 1;
+            tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -101,7 +101,7 @@
             txtId.Location = new Point(64, 9);
             txtId.Name = "txtId";
             txtId.Size = new Size(52, 23);
-            txtId.TabIndex = 2;
+            txtId.TabIndex = 20;
             txtId.Text = "0";
             // 
             // label3

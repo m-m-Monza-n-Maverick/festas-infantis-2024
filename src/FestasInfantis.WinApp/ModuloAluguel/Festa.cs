@@ -1,42 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace FestasInfantis.WinApp.ModuloAluguel
+﻿namespace FestasInfantis.WinApp.ModuloAluguel
 {
-    public class Festa
+    public class Festa (string rua, int numero, string bairro, string cidade, string estado, DateTime dataFesta, TimeSpan horaInicio, TimeSpan horaFim)
     {
-        public string Endereco
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public DateTime Data
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public TimeSpan HoraInicio
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public TimeSpan HoraFim
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public string Rua { get; set; } = rua;
+        public int Numero { get; set; } = numero;
+        public string Bairro { get; set; } = bairro;
+        public string Cidade { get; set; } = cidade;
+        public string Estado { get; set; } = estado;
+        public DateTime DataFesta { get; set; } = dataFesta;
+        public TimeSpan HoraInicio { get; set; } = horaInicio;
+        public TimeSpan HoraFim { get; set; } = horaFim;
+        public string Endereço { get; set; } = $"Rua {rua}, Nº {numero}, Bairro {bairro}, {cidade}/{estado}";
     }
 }
