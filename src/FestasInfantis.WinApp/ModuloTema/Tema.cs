@@ -1,4 +1,5 @@
 ﻿using eAgenda.ConsoleApp.Compartilhado;
+using eAgenda.WinApp.Compartilhado;
 using FestasInfantis.WinApp.ModuloItem;
 namespace FestasInfantis.WinApp
 {
@@ -38,5 +39,6 @@ namespace FestasInfantis.WinApp
 
             return erros;
         }
+        public override string ToString() => $"Tema {Nome.ToTitleCase()}, Valor: {Valor}";
     }
 }

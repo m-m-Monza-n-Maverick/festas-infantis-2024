@@ -2,9 +2,11 @@
 using FestasInfantis.WinApp.ModuloTema;
 namespace FestasInfantis.WinApp.ModuloAluguel
 {
-    internal class ControladorAluguel (RepositorioAluguel repositorioAluguel) : ControladorBase
+    internal class ControladorAluguel (RepositorioAluguel repositorioAluguel, RepositorioTema repositorioTema) : ControladorBase
     {
         private RepositorioAluguel repositorioAluguel = repositorioAluguel;
+        //private RepositorioCliente repositorioCliente = repositorioCliente;
+        private RepositorioTema repositorioTema = repositorioTema;
         private TabelaAluguelControl tabelaAlugueis;
         public int id = 1;
 
@@ -18,6 +20,10 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         public override void Adicionar()
         {
             TelaAluguelForm telaAluguel = new(id);
+
+            CarregarClientes(telaAluguel);
+            CarregarTemas(telaAluguel);
+
             DialogResult resultado = telaAluguel.ShowDialog();
 
             if (resultado != DialogResult.OK) return;
@@ -36,6 +42,9 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             Aluguel aluguelSelecionado = repositorioAluguel.SelecionarPorId(idSelecionado);
 
             TelaAluguelForm telaAluguel = new(idSelecionado);
+
+            CarregarClientes(telaAluguel);
+            CarregarTemas(telaAluguel);
 
             if (SemSeleção(aluguelSelecionado)) return;
 
@@ -86,11 +95,23 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
             tabelaAlugueis.AtualizarRegistros(alugueis);
         }
+        private void CarregarTemas(TelaAluguelForm telaAluguel)
+        {
+            List<Tema> temasCadastrados = repositorioTema.SelecionarTodos();
+            if (temasCadastrados.Count == 0) temasCadastrados = [new("não cadastrado..........", [])];
+            telaAluguel.CarregarTemas(temasCadastrados);
+        }
+        private void CarregarClientes(TelaAluguelForm telaAluguel)
+        {
+            /*            List<Cliente> clientesCadastrados = repositorioCliente.SelecionarTodos();
+                        if (clientesCadastrados.Count == 0) clientesCadastrados = [new()];
+                        telaAluguel.CarregarClientes(clientesCadastrados);*/
+        }
         private void CarregaMensagem(Aluguel aluguel, string texto)
         {
             TelaPrincipalForm
                 .Instancia
-                .AtualizarRodape($"O registro \"{aluguel}\" foi {texto} com sucesso!");
+                .AtualizarRodape($"O aluguel do tema \"{aluguel.Tema}\" foi {texto} com sucesso!");
         }
         private void RealizaAcao(Action acao, Aluguel aluguel, string texto)
         {
