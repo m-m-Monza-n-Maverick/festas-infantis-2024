@@ -78,6 +78,7 @@
             clientesMenuItem.Name = "clientesMenuItem";
             clientesMenuItem.Size = new Size(180, 24);
             clientesMenuItem.Text = "Clientes";
+            clientesMenuItem.Click += clientesMenuItem_Click;
             // 
             // temasMenuItem
             // 
@@ -90,7 +91,7 @@
             // itensToolStripMenuItem
             // 
             itensToolStripMenuItem.Name = "itensToolStripMenuItem";
-            itensToolStripMenuItem.Size = new Size(180, 24);
+            itensToolStripMenuItem.Size = new Size(109, 24);
             itensToolStripMenuItem.Text = "Itens";
             itensToolStripMenuItem.Click += itensToolStripMenuItem_Click;
             // 

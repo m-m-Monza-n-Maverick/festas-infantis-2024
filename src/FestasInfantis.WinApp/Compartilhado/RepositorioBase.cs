@@ -21,7 +21,6 @@
                 return false;
 
             registro.AtualizarRegistro(novaEntidade);
-
             return true;
         }
 
