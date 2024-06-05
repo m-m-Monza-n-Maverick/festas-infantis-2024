@@ -71,6 +71,8 @@ namespace FestasInfantis.WinApp.ModuloTema
             RealizaAcao(
                 () => repositorioTema.Excluir(temaSelecionado.Id),
                 temaSelecionado, "excluído");
+
+            LiberaItem(repositorioItem, temaSelecionado);
         }
 
         #region Auxiliares
@@ -86,6 +88,12 @@ namespace FestasInfantis.WinApp.ModuloTema
             List<Tema> temas = repositorioTema.SelecionarTodos();
 
             tabelaTemas.AtualizarRegistros(temas);
+        }
+        private static void LiberaItem(RepositorioItem repositorioItem, Tema temaSelecionado)
+        {
+            foreach (Item item in repositorioItem.SelecionarTodos())
+                foreach (Item itemTema in temaSelecionado.Itens)
+                    if (item == itemTema) item.Tema = null;
         }
         private void CarregaMensagem(Tema Tema, string texto)
         {

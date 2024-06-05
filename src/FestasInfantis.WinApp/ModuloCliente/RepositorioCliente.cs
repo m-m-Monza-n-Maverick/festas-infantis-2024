@@ -1,7 +1,5 @@
 using eAgenda.ConsoleApp.Compartilhado;
-using FestasInfantis.WinApp;
-
-namespace FestasInfantis.WinFormsApp.ModuloClientes
+namespace FestasInfantis.WinApp.ModuloCliente
 {
     public class RepositorioCliente : RepositorioBase<Cliente>
     { 

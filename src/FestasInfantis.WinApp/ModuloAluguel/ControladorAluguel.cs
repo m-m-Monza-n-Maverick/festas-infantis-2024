@@ -1,11 +1,12 @@
 ﻿using eAgenda.WinApp.Compartilhado;
+using FestasInfantis.WinApp.ModuloCliente;
 using FestasInfantis.WinApp.ModuloTema;
 namespace FestasInfantis.WinApp.ModuloAluguel
 {
-    internal class ControladorAluguel (RepositorioAluguel repositorioAluguel, RepositorioTema repositorioTema) : ControladorBase
+    internal class ControladorAluguel (RepositorioAluguel repositorioAluguel, RepositorioCliente repositorioCliente,RepositorioTema repositorioTema) : ControladorBase
     {
         private RepositorioAluguel repositorioAluguel = repositorioAluguel;
-        //private RepositorioCliente repositorioCliente = repositorioCliente;
+        private RepositorioCliente repositorioCliente = repositorioCliente;
         private RepositorioTema repositorioTema = repositorioTema;
         private TabelaAluguelControl tabelaAlugueis;
         public int id = 1;
@@ -98,14 +99,14 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         private void CarregarTemas(TelaAluguelForm telaAluguel)
         {
             List<Tema> temasCadastrados = repositorioTema.SelecionarTodos();
-            if (temasCadastrados.Count == 0) temasCadastrados = [new("não cadastrado..........", [])];
+            if (temasCadastrados.Count == 0) temasCadastrados = [new("", [])];
             telaAluguel.CarregarTemas(temasCadastrados);
         }
         private void CarregarClientes(TelaAluguelForm telaAluguel)
         {
-            /*            List<Cliente> clientesCadastrados = repositorioCliente.SelecionarTodos();
-                        if (clientesCadastrados.Count == 0) clientesCadastrados = [new()];
-                        telaAluguel.CarregarClientes(clientesCadastrados);*/
+            List<Cliente> clientesCadastrados = repositorioCliente.SelecionarTodos();
+            if (clientesCadastrados.Count == 0) clientesCadastrados = [new("Não há clientes...", "", "")];
+            telaAluguel.CarregarClientes(clientesCadastrados);
         }
         private void CarregaMensagem(Aluguel aluguel, string texto)
         {

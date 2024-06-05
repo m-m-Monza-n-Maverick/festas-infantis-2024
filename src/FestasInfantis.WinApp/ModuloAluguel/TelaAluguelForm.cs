@@ -16,7 +16,6 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         {
             InitializeComponent();
             txtId.Text = id.ToString();
-
             ConfiguraComboBox();
         }
 
@@ -32,28 +31,13 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             foreach (Tema tema in temas)
                 cmbTema.Items.Add(tema);
         }
-
-
         private void btnGravar_Click(object sender, EventArgs e)
         {
-            DateTime dataFesta = dtpDataFesta.Value;
-            TimeSpan horaInicio = dtpHoraInicio.Value.TimeOfDay;
-            TimeSpan horaFim = dtpHoraFim.Value.TimeOfDay;
-            string rua = txtRua.Text, numero = txtNumero.Text, bairro = txtBairro.Text, cidade = txtCidade.Text, estado = cmbEstado.Text;
-
-            Festa festa = new(rua, Convert.ToInt32(numero), bairro, cidade, estado, dataFesta, horaInicio, horaFim);
-
-            Cliente cliente = (Cliente)cmbClientes.SelectedItem;
-            Tema tema = (Tema)cmbTema.SelectedItem;
-            string[] sinal = cmbPercentEntrada.Text.Split('%');
-            decimal porcentEntrada = 0;
-
-            if (sinal[0] != "") porcentEntrada = Convert.ToDecimal(sinal[0]) / 100;
-
-            aluguel = new(cliente, tema, porcentEntrada, festa);
-
+            RecebeInformacoesDoAluguel();
             ValidacaoDeCampos(aluguel);
         }
+
+        #region Auxiliares
         private void ValidacaoDeCampos(EntidadeBase entidade)
         {
             List<string> erros = entidade.Validar();
@@ -63,6 +47,26 @@ namespace FestasInfantis.WinApp.ModuloAluguel
                 TelaPrincipalForm.Instancia.AtualizarRodape(erros[0]);
                 DialogResult = DialogResult.None;
             }
+        }
+        private TimeSpan ValidaHora(string horario)
+        {
+            string[] hora = horario.Split(':');
+
+            if (horario != "  :")
+                if (Convert.ToInt16(hora[0]) <= 23 && Convert.ToInt16(hora[1]) <= 59)
+                    return TimeSpan.Parse(mskHoraInicio.Text);
+            return TimeSpan.Zero;
+        }
+        private decimal ValidaPorcentagem()
+        {
+            string[] sinal = cmbPercentEntrada.Text.Split('%');
+            if (sinal[0] != "") return Convert.ToDecimal(sinal[0]) / 100;
+            return 0;
+        }
+        private string ValidaEstado()
+        {
+            if (cmbEstado.Items.Contains(cmbEstado.Text.ToUpper())) return cmbEstado.Text;
+            return "";
         }
         private void ConfiguraComboBox()
         {
@@ -77,6 +81,44 @@ namespace FestasInfantis.WinApp.ModuloAluguel
                 //Atribui True no Handled para cancelar o evento
                 e.Handled = true;
             }
+        }
+        private void dtpDataFesta_ValueChanged(object sender, EventArgs e) => dtpDataFesta.CustomFormat = "dd/MM/yyyy";
+        #endregion
+
+        private void btnAdicionar_Click(object sender, EventArgs e) { }
+        private void toolStripLabel1_Click(object sender, EventArgs e)
+        {
+            RecebeInformacoesDoAluguel();
+
+            List<string> erros = aluguel.Validar();
+            if (erros.Count > 0)
+            {
+                TelaPrincipalForm.Instancia.AtualizarRodape(erros[0]);
+                return;
+            }
+
+            txtPercentDesconto.Text = aluguel.PorcentDesconto.ToString();
+            txtValorTema.Text = aluguel.Tema.Valor.ToString();
+            txtValorEntrada.Text = aluguel.ValorEntrada.ToString();
+            txtTemaComDesconto.Text = aluguel.ValorTemaComDesconto.ToString();
+            txtValorPendente.Text = aluguel.ValorPendente.ToString();
+        }
+
+        private void RecebeInformacoesDoAluguel()
+        {
+            DateTime dataFesta = dtpDataFesta.Value;
+            TimeSpan horaInicio = ValidaHora(mskHoraInicio.Text);
+            TimeSpan horaFim = ValidaHora(mskHoraFim.Text);
+            string rua = txtRua.Text, numero = txtNumero.Text, bairro = txtBairro.Text, cidade = txtCidade.Text;
+            string estado = ValidaEstado();
+
+            Festa festa = new(rua, numero, bairro, cidade, estado, dataFesta, horaInicio, horaFim);
+
+            Cliente cliente = (Cliente)cmbClientes.SelectedItem;
+            Tema tema = (Tema)cmbTema.SelectedItem;
+            decimal porcentEntrada = ValidaPorcentagem();
+
+            aluguel = new(cliente, tema, porcentEntrada, festa);
         }
     }
 }

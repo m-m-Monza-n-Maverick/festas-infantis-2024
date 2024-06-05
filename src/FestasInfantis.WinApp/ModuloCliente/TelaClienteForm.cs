@@ -1,4 +1,6 @@
-﻿namespace FestasInfantis.WinApp.ModuloCliente
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace FestasInfantis.WinApp.ModuloCliente
 {
     public partial class TelaClienteForm : Form
     {
@@ -22,6 +24,8 @@
         {
             InitializeComponent();
             txtId.Text = id.ToString();
+            txtCPF.PlaceholderText = "___.___.___-__";
+            txtTelefone.PlaceholderText = "(__)_____-____";
         }
 
         private void btnGravar_Click(object sender, EventArgs e)
@@ -40,6 +44,26 @@
 
                 DialogResult = DialogResult.None;
             }
+        }
+
+        private void txtTelefone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Se a tecla digitada não for número e nem backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08)
+            {
+                //Atribui True no Handled para cancelar o evento
+                e.Handled = true;
+            }
+        }
+        private void txtCPF_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Se a tecla digitada não for número e nem backspace
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08)
+            {
+                //Atribui True no Handled para cancelar o evento
+                e.Handled = true;
+            }
+
         }
     }
 }

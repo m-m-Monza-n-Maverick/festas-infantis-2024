@@ -1,9 +1,9 @@
 using eAgenda.WinApp.Compartilhado;
 using FestasInfantis.WinApp.ModuloAluguel;
+using FestasInfantis.WinApp.ModuloCliente;
 using FestasInfantis.WinApp.ModuloItem;
 using FestasInfantis.WinApp.ModuloTema;
 using FestasInfantis.WinFormsApp.ModuloCliente;
-using FestasInfantis.WinFormsApp.ModuloClientes;
 namespace FestasInfantis.WinApp
 {
     public partial class TelaPrincipalForm : Form
@@ -12,9 +12,7 @@ namespace FestasInfantis.WinApp
 
         RepositorioTema repositorioTema;
         RepositorioItem repositorioItem;
-
         RepositorioCliente reposistoCliente;
-
         RepositorioAluguel repositorioAluguel;
 
         public static TelaPrincipalForm Instancia { get; private set; }
@@ -44,7 +42,7 @@ namespace FestasInfantis.WinApp
         private void itensToolStripMenuItem_Click(object sender, EventArgs e)
             => SelecionaModulo(ref controlador, () => controlador = new ControladorItem(repositorioItem));
         private void alugueisMenuItem_Click(object sender, EventArgs e)
-            => SelecionaModulo(ref controlador, () => controlador = new ControladorAluguel(repositorioAluguel, repositorioTema));
+            => SelecionaModulo(ref controlador, () => controlador = new ControladorAluguel(repositorioAluguel, reposistoCliente, repositorioTema));
         private void clientesMenuItem_Click(object sender, EventArgs e)
             => SelecionaModulo(ref controlador, () => controlador = new ControladorCliente(reposistoCliente));
 

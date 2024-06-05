@@ -30,7 +30,7 @@
         }
         protected void VerificaNulo(ref List<string> erros, TimeSpan campoTestado, string mostraCampo)
         {
-            if (string.IsNullOrEmpty(campoTestado.ToString()))
+            if (campoTestado == TimeSpan.Zero)
                 erros.Add($"\nO campo \"{mostraCampo}\" é obrigatório. Tente novamente ");
         }
 

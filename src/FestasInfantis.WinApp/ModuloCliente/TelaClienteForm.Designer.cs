@@ -89,8 +89,8 @@
             txtTelefone.Location = new Point(84, 124);
             txtTelefone.Name = "txtTelefone";
             txtTelefone.Size = new Size(181, 23);
-            txtTelefone.TabIndex = 1;
-            txtTelefone.Text = "(__) _____-____";
+            txtTelefone.TabIndex = 2;
+            txtTelefone.KeyPress += txtTelefone_KeyPress;
             // 
             // txtNome
             // 
@@ -104,7 +104,8 @@
             txtCPF.Location = new Point(84, 95);
             txtCPF.Name = "txtCPF";
             txtCPF.Size = new Size(181, 23);
-            txtCPF.TabIndex = 2;
+            txtCPF.TabIndex = 1;
+            txtCPF.KeyPress += txtCPF_KeyPress;
             // 
             // btnCancelar
             // 
