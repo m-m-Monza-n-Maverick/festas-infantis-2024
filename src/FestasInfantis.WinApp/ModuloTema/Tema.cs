@@ -39,6 +39,10 @@ namespace FestasInfantis.WinApp
 
             return erros;
         }
-        public override string ToString() => $"Tema {Nome.ToTitleCase()}, Valor: {Valor}";
+        public override string ToString()
+        {
+            if (Nome == "") return "Não há temas...";
+            return $"{Nome.ToTitleCase()}, Valor: {Valor}";
+        } 
     }
 }

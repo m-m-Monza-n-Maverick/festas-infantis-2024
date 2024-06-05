@@ -16,7 +16,7 @@ namespace FestasInfantis.WinApp.ModuloItem
 
         public override void Adicionar()
         {
-            TelaItemForm telaItem = new(id++);
+            TelaItemForm telaItem = new(id);
             DialogResult resultado = telaItem.ShowDialog();
 
             if (resultado != DialogResult.OK) return;
@@ -26,6 +26,8 @@ namespace FestasInfantis.WinApp.ModuloItem
             RealizaAcao(
                 () => repositorioItem.Cadastrar(novoItem),
                 novoItem, "criado");
+
+            id++;
         }
         public override void Editar()
         {
@@ -44,6 +46,7 @@ namespace FestasInfantis.WinApp.ModuloItem
             if (resultado != DialogResult.OK) return;
 
             Item temaEditado = telaItem.Item;
+
             RealizaAcao(
                 () => repositorioItem.Editar(itemSelecionado.Id, temaEditado),
                 temaEditado, "editado");
@@ -63,6 +66,9 @@ namespace FestasInfantis.WinApp.ModuloItem
                 MessageBoxIcon.Warning);
 
             if (resposta != DialogResult.Yes) return;
+
+            itemSelecionado.Valor = 0;
+
             RealizaAcao(
                 () => repositorioItem.Excluir(itemSelecionado.Id),
                 itemSelecionado, "excluído");

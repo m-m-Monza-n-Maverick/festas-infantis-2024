@@ -1,10 +1,6 @@
-using System;
-using eAgenda.ConsoleApp.Compartilhado;
 using eAgenda.WinApp.Compartilhado;
 using FestasInfantis.WinApp;
 using FestasInfantis.WinApp.ModuloCliente;
-using FestasInfantis.WinApp.ModuloItem;
-using FestasInfantis.WinFormsApp.ModuloClientes;
 namespace FestasInfantis.WinFormsApp.ModuloCliente
 {
     internal class ControladorCliente(RepositorioCliente repositorioCliente) : ControladorBase
@@ -22,10 +18,10 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
 
         public override void Adicionar()
         {
-            TelaClienteForm telaCliente = new TelaClienteForm(id++);
+            TelaClienteForm telaCliente = new TelaClienteForm(id);
             DialogResult resultado = telaCliente.ShowDialog();
 
-            if (resultado != DialogResult.OK) { id--; return; } 
+            if (resultado != DialogResult.OK) return;
             
             Cliente novoCliente = telaCliente.Cliente;
 
@@ -37,6 +33,7 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
                 .Instancia
                 .AtualizarRodape($"O registro \"{novoCliente.Nome}\" foi criado com sucesso!");
 
+            id++;
         }
         public override void Editar()
         {

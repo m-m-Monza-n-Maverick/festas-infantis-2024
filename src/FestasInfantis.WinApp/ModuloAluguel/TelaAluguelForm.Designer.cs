@@ -42,14 +42,17 @@
             label6 = new Label();
             label7 = new Label();
             groupBox1 = new GroupBox();
-            dtpHoraFim = new DateTimePicker();
-            dtpHoraInicio = new DateTimePicker();
+            mskHoraFim = new MaskedTextBox();
+            mskHoraInicio = new MaskedTextBox();
             label4 = new Label();
             label1 = new Label();
             dtpDataFesta = new DateTimePicker();
             label3 = new Label();
             tabPage2 = new TabPage();
             groupBox3 = new GroupBox();
+            toolStrip1 = new ToolStrip();
+            btnAdicionar = new ToolStripButton();
+            toolStripLabel1 = new ToolStripLabel();
             txtValorPendente = new TextBox();
             label17 = new Label();
             txtTemaComDesconto = new TextBox();
@@ -76,16 +79,17 @@
             groupBox1.SuspendLayout();
             tabPage2.SuspendLayout();
             groupBox3.SuspendLayout();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
-            tabControl1.Location = new Point(12, 67);
+            tabControl1.Location = new Point(12, 59);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(456, 360);
+            tabControl1.Size = new Size(456, 343);
             tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -95,7 +99,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(448, 332);
+            tabPage1.Size = new Size(448, 315);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Dados da Festa";
             tabPage1.UseVisualStyleBackColor = true;
@@ -127,7 +131,7 @@
             cmbEstado.Location = new Point(320, 40);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(81, 23);
-            cmbEstado.TabIndex = 12;
+            cmbEstado.TabIndex = 4;
             // 
             // txtNumero
             // 
@@ -135,14 +139,15 @@
             txtNumero.Location = new Point(320, 98);
             txtNumero.Name = "txtNumero";
             txtNumero.Size = new Size(81, 23);
-            txtNumero.TabIndex = 9;
+            txtNumero.TabIndex = 7;
+            txtNumero.TextAlign = HorizontalAlignment.Center;
             txtNumero.KeyPress += txtNumero_KeyPress;
             // 
             // label9
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 9F);
-            label9.Location = new Point(260, 104);
+            label9.Location = new Point(260, 101);
             label9.Name = "label9";
             label9.Size = new Size(54, 15);
             label9.TabIndex = 11;
@@ -154,13 +159,13 @@
             txtBairro.Location = new Point(59, 98);
             txtBairro.Name = "txtBairro";
             txtBairro.Size = new Size(187, 23);
-            txtBairro.TabIndex = 10;
+            txtBairro.TabIndex = 6;
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9F);
-            label5.Location = new Point(14, 104);
+            label5.Location = new Point(14, 101);
             label5.Name = "label5";
             label5.Size = new Size(41, 15);
             label5.TabIndex = 9;
@@ -172,7 +177,7 @@
             txtRua.Location = new Point(59, 69);
             txtRua.Name = "txtRua";
             txtRua.Size = new Size(342, 23);
-            txtRua.TabIndex = 8;
+            txtRua.TabIndex = 5;
             // 
             // txtCidade
             // 
@@ -180,13 +185,13 @@
             txtCidade.Location = new Point(59, 40);
             txtCidade.Name = "txtCidade";
             txtCidade.Size = new Size(187, 23);
-            txtCidade.TabIndex = 7;
+            txtCidade.TabIndex = 3;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 9F);
-            label8.Location = new Point(269, 46);
+            label8.Location = new Point(269, 43);
             label8.Name = "label8";
             label8.Size = new Size(45, 15);
             label8.TabIndex = 6;
@@ -196,7 +201,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F);
-            label6.Location = new Point(25, 75);
+            label6.Location = new Point(25, 72);
             label6.Name = "label6";
             label6.Size = new Size(30, 15);
             label6.TabIndex = 2;
@@ -206,7 +211,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 9F);
-            label7.Location = new Point(8, 46);
+            label7.Location = new Point(8, 43);
             label7.Name = "label7";
             label7.Size = new Size(47, 15);
             label7.TabIndex = 1;
@@ -214,8 +219,8 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(dtpHoraFim);
-            groupBox1.Controls.Add(dtpHoraInicio);
+            groupBox1.Controls.Add(mskHoraFim);
+            groupBox1.Controls.Add(mskHoraInicio);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(dtpDataFesta);
@@ -228,34 +233,25 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Data e Hora:";
             // 
-            // dtpHoraFim
+            // mskHoraFim
             // 
-            dtpHoraFim.CustomFormat = "HH:mm";
-            dtpHoraFim.Font = new Font("Segoe UI", 9F);
-            dtpHoraFim.Format = DateTimePickerFormat.Custom;
-            dtpHoraFim.Location = new Point(134, 87);
-            dtpHoraFim.MaxDate = new DateTime(2100, 12, 31, 0, 0, 0, 0);
-            dtpHoraFim.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
-            dtpHoraFim.Name = "dtpHoraFim";
-            dtpHoraFim.ShowUpDown = true;
-            dtpHoraFim.Size = new Size(108, 23);
-            dtpHoraFim.TabIndex = 2;
+            mskHoraFim.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            mskHoraFim.Location = new Point(134, 87);
+            mskHoraFim.Mask = "00:00";
+            mskHoraFim.Name = "mskHoraFim";
+            mskHoraFim.Size = new Size(108, 23);
+            mskHoraFim.TabIndex = 2;
+            mskHoraFim.ValidatingType = typeof(DateTime);
             // 
-            // dtpHoraInicio
+            // mskHoraInicio
             // 
-            dtpHoraInicio.Checked = false;
-            dtpHoraInicio.CustomFormat = "HH:mm";
-            dtpHoraInicio.Font = new Font("Segoe UI", 9F);
-            dtpHoraInicio.Format = DateTimePickerFormat.Custom;
-            dtpHoraInicio.ImeMode = ImeMode.NoControl;
-            dtpHoraInicio.Location = new Point(134, 58);
-            dtpHoraInicio.MaxDate = new DateTime(2100, 12, 31, 0, 0, 0, 0);
-            dtpHoraInicio.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
-            dtpHoraInicio.Name = "dtpHoraInicio";
-            dtpHoraInicio.RightToLeft = RightToLeft.No;
-            dtpHoraInicio.ShowUpDown = true;
-            dtpHoraInicio.Size = new Size(108, 23);
-            dtpHoraInicio.TabIndex = 1;
+            mskHoraInicio.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            mskHoraInicio.Location = new Point(134, 58);
+            mskHoraInicio.Mask = "00:00";
+            mskHoraInicio.Name = "mskHoraInicio";
+            mskHoraInicio.Size = new Size(108, 23);
+            mskHoraInicio.TabIndex = 1;
+            mskHoraInicio.ValidatingType = typeof(DateTime);
             // 
             // label4
             // 
@@ -280,14 +276,16 @@
             // dtpDataFesta
             // 
             dtpDataFesta.Checked = false;
+            dtpDataFesta.CustomFormat = "     /     /";
             dtpDataFesta.Font = new Font("Segoe UI", 9F);
-            dtpDataFesta.Format = DateTimePickerFormat.Short;
+            dtpDataFesta.Format = DateTimePickerFormat.Custom;
             dtpDataFesta.Location = new Point(134, 29);
             dtpDataFesta.MaxDate = new DateTime(2100, 12, 31, 0, 0, 0, 0);
             dtpDataFesta.MinDate = new DateTime(2024, 6, 5, 0, 0, 0, 0);
             dtpDataFesta.Name = "dtpDataFesta";
             dtpDataFesta.Size = new Size(108, 23);
             dtpDataFesta.TabIndex = 0;
+            dtpDataFesta.ValueChanged += dtpDataFesta_ValueChanged;
             // 
             // label3
             // 
@@ -311,13 +309,15 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(448, 332);
+            tabPage2.Size = new Size(448, 315);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Dados do Aluguel";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
+            groupBox3.BackgroundImageLayout = ImageLayout.Zoom;
+            groupBox3.Controls.Add(toolStrip1);
             groupBox3.Controls.Add(txtValorPendente);
             groupBox3.Controls.Add(label17);
             groupBox3.Controls.Add(txtTemaComDesconto);
@@ -335,6 +335,40 @@
             groupBox3.TabIndex = 38;
             groupBox3.TabStop = false;
             groupBox3.Text = "Dados de Pagamento:";
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.AutoSize = false;
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnAdicionar, toolStripLabel1 });
+            toolStrip1.Location = new Point(3, 23);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(401, 40);
+            toolStrip1.TabIndex = 16;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // btnAdicionar
+            // 
+            btnAdicionar.AutoSize = false;
+            btnAdicionar.AutoToolTip = false;
+            btnAdicionar.BackgroundImage = Properties.Resources.btnCalcularShow;
+            btnAdicionar.BackgroundImageLayout = ImageLayout.Zoom;
+            btnAdicionar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnAdicionar.Enabled = false;
+            btnAdicionar.ImageTransparentColor = Color.Magenta;
+            btnAdicionar.Name = "btnAdicionar";
+            btnAdicionar.Padding = new Padding(5);
+            btnAdicionar.Size = new Size(38, 38);
+            btnAdicionar.Text = "Calcular";
+            btnAdicionar.Click += btnAdicionar_Click;
+            // 
+            // toolStripLabel1
+            // 
+            toolStripLabel1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStripLabel1.ForeColor = SystemColors.ControlDarkDark;
+            toolStripLabel1.Name = "toolStripLabel1";
+            toolStripLabel1.Size = new Size(55, 37);
+            toolStripLabel1.Text = "Calcular";
+            toolStripLabel1.Click += toolStripLabel1_Click;
             // 
             // txtValorPendente
             // 
@@ -448,7 +482,7 @@
             cmbPercentEntrada.Location = new Point(64, 59);
             cmbPercentEntrada.Name = "cmbPercentEntrada";
             cmbPercentEntrada.Size = new Size(149, 23);
-            cmbPercentEntrada.TabIndex = 36;
+            cmbPercentEntrada.TabIndex = 2;
             // 
             // label11
             // 
@@ -466,7 +500,7 @@
             cmbTema.Location = new Point(284, 30);
             cmbTema.Name = "cmbTema";
             cmbTema.Size = new Size(149, 23);
-            cmbTema.TabIndex = 34;
+            cmbTema.TabIndex = 1;
             // 
             // label10
             // 
@@ -484,12 +518,12 @@
             cmbClientes.Location = new Point(64, 30);
             cmbClientes.Name = "cmbClientes";
             cmbClientes.Size = new Size(149, 23);
-            cmbClientes.TabIndex = 32;
+            cmbClientes.TabIndex = 0;
             // 
             // txtId
             // 
             txtId.Enabled = false;
-            txtId.Location = new Point(41, 25);
+            txtId.Location = new Point(41, 20);
             txtId.Name = "txtId";
             txtId.Size = new Size(66, 23);
             txtId.TabIndex = 2;
@@ -498,7 +532,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(16, 29);
+            label2.Location = new Point(16, 24);
             label2.Name = "label2";
             label2.Size = new Size(20, 15);
             label2.TabIndex = 0;
@@ -507,10 +541,10 @@
             // btnGravar
             // 
             btnGravar.DialogResult = DialogResult.OK;
-            btnGravar.Location = new Point(393, 445);
+            btnGravar.Location = new Point(393, 418);
             btnGravar.Name = "btnGravar";
             btnGravar.Size = new Size(75, 23);
-            btnGravar.TabIndex = 6;
+            btnGravar.TabIndex = 9;
             btnGravar.Text = "Gravar";
             btnGravar.UseVisualStyleBackColor = true;
             btnGravar.Click += btnGravar_Click;
@@ -518,10 +552,10 @@
             // btnCancelar
             // 
             btnCancelar.DialogResult = DialogResult.Cancel;
-            btnCancelar.Location = new Point(12, 445);
+            btnCancelar.Location = new Point(12, 418);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(75, 23);
-            btnCancelar.TabIndex = 5;
+            btnCancelar.TabIndex = 8;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             // 
@@ -529,7 +563,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(480, 480);
+            ClientSize = new Size(480, 447);
             Controls.Add(btnGravar);
             Controls.Add(txtId);
             Controls.Add(btnCancelar);
@@ -551,6 +585,8 @@
             tabPage2.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -570,8 +606,6 @@
         private GroupBox groupBox2;
         private Label label6;
         private Label label7;
-        private DateTimePicker dtpHoraFim;
-        private DateTimePicker dtpHoraInicio;
         private Label label4;
         private Label label1;
         private TextBox txtCidade;
@@ -599,5 +633,10 @@
         private TextBox txtValorTema;
         private TextBox txtPercentDesconto;
         private ComboBox cmbEstado;
+        private MaskedTextBox mskHoraInicio;
+        private MaskedTextBox mskHoraFim;
+        private ToolStrip toolStrip1;
+        private ToolStripButton btnAdicionar;
+        private ToolStripLabel toolStripLabel1;
     }
 }

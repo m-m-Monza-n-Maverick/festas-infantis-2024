@@ -1,4 +1,5 @@
 ﻿using eAgenda.ConsoleApp.Compartilhado;
+using eAgenda.WinApp.Compartilhado;
 
 namespace FestasInfantis.WinApp
 {
@@ -17,14 +18,19 @@ namespace FestasInfantis.WinApp
             List<string> erros = new List<string>();
 
             if (string.IsNullOrEmpty(Nome.Trim()))
-                erros.Add("O campo \"nome\" è obrigatório");
+                erros.Add("O campo \"nome\" é obrigatório");
 
             if (string.IsNullOrEmpty(Telefone.Trim()))
-                erros.Add("O campo \"Telefone\" è obrigatório");
+                erros.Add("O campo \"Telefone\" é obrigatório");
+
+            //if (CPF.Length != 11)
+                //erros.Add("O campo \"CPF\" está incorreto");
+
+            //if (Telefone.Length != 11)
+                //erros.Add("O campo \"Telefone\" está incorreto");
 
             if (string.IsNullOrEmpty(CPF.Trim()))
-
-                erros.Add("O campo \"CPF\" è obrigatório");
+                erros.Add("O campo \"CPF\" é obrigatório");
 
             return erros;
         }
@@ -38,9 +44,6 @@ namespace FestasInfantis.WinApp
             CPF = atualizado.CPF;
         }
 
-        public override string ToString()
-        {
-            return $"Nome: {Nome}, Telefone: {Telefone}, CPF: {CPF}";
-        }
+        public override string ToString() => $"{Nome.ToTitleCase()}";
     }
 }
