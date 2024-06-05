@@ -43,72 +43,73 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(61, 50);
+            label1.Location = new Point(61, 41);
             label1.Name = "label1";
-            label1.Size = new Size(17, 15);
+            label1.Size = new Size(20, 15);
             label1.TabIndex = 0;
-            label1.Text = "Id";
+            label1.Text = "Id:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(38, 102);
+            label2.Location = new Point(38, 70);
             label2.Name = "label2";
-            label2.Size = new Size(40, 15);
+            label2.Size = new Size(43, 15);
             label2.TabIndex = 1;
-            label2.Text = "Nome";
+            label2.Text = "Nome:";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(27, 144);
+            label3.Location = new Point(27, 128);
             label3.Name = "label3";
-            label3.Size = new Size(51, 15);
+            label3.Size = new Size(54, 15);
             label3.TabIndex = 2;
-            label3.Text = "Telefone";
+            label3.Text = "Telefone:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(50, 179);
+            label4.Location = new Point(50, 99);
             label4.Name = "label4";
-            label4.Size = new Size(28, 15);
+            label4.Size = new Size(31, 15);
             label4.TabIndex = 3;
-            label4.Text = "CPF";
+            label4.Text = "CPF:";
             // 
             // txtId
             // 
             txtId.Enabled = false;
-            txtId.Location = new Point(84, 42);
+            txtId.Location = new Point(84, 37);
             txtId.Name = "txtId";
             txtId.Size = new Size(55, 23);
             txtId.TabIndex = 13;
             // 
             // txtTelefone
             // 
-            txtTelefone.Location = new Point(84, 136);
+            txtTelefone.Location = new Point(84, 124);
             txtTelefone.Name = "txtTelefone";
-            txtTelefone.Size = new Size(100, 23);
+            txtTelefone.Size = new Size(181, 23);
             txtTelefone.TabIndex = 1;
+            txtTelefone.Text = "(__) _____-____";
             // 
             // txtNome
             // 
-            txtNome.Location = new Point(84, 94);
+            txtNome.Location = new Point(84, 66);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(204, 23);
+            txtNome.Size = new Size(281, 23);
             txtNome.TabIndex = 0;
             // 
             // txtCPF
             // 
-            txtCPF.Location = new Point(84, 176);
+            txtCPF.Location = new Point(84, 95);
             txtCPF.Name = "txtCPF";
-            txtCPF.Size = new Size(100, 23);
+            txtCPF.Size = new Size(181, 23);
             txtCPF.TabIndex = 2;
             // 
             // btnCancelar
             // 
             btnCancelar.DialogResult = DialogResult.Cancel;
-            btnCancelar.Location = new Point(213, 243);
+            btnCancelar.Location = new Point(12, 181);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(75, 23);
             btnCancelar.TabIndex = 3;
@@ -118,7 +119,7 @@
             // btnGravar
             // 
             btnGravar.DialogResult = DialogResult.OK;
-            btnGravar.Location = new Point(132, 243);
+            btnGravar.Location = new Point(325, 181);
             btnGravar.Name = "btnGravar";
             btnGravar.Size = new Size(75, 23);
             btnGravar.TabIndex = 4;
@@ -130,7 +131,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(325, 279);
+            ClientSize = new Size(412, 212);
             Controls.Add(btnGravar);
             Controls.Add(btnCancelar);
             Controls.Add(txtCPF);
@@ -141,6 +142,9 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "TelaClienteForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "TelaClienteForm";
