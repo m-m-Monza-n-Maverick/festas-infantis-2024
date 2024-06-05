@@ -76,6 +76,7 @@
             clientesMenuItem.Name = "clientesMenuItem";
             clientesMenuItem.Size = new Size(135, 24);
             clientesMenuItem.Text = "Clientes";
+            clientesMenuItem.Click += clientesMenuItem_Click;
             // 
             // temasMenuItem
             // 
