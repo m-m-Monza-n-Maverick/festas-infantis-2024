@@ -1,9 +1,19 @@
-﻿using eAgenda.ConsoleApp.Compartilhado;
+﻿using FestasInfantis.WinApp.Compartilhado;
+using FestasInfantis.WinApp.ModuloAluguel;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FestasInfantis.WinApp.ModuloAluguel
 {
-    public class RepositorioAluguelEmMemoria : RepositorioBaseEmMemoria<Aluguel>, IRepositorioAluguel 
+    internal class RepositorioAluguelEmArquivo : RepositorioBaseEmArquivo<Aluguel>, IRepositorioAluguel
     {
+        public RepositorioAluguelEmArquivo() : base("alugueis.json")
+        {
+
+        }
+
         public decimal PorcentDesconto { get; set; }
         public decimal PorcentMaxDesconto { get; set; } = 0.3m;
 
