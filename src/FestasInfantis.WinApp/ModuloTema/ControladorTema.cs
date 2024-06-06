@@ -2,9 +2,9 @@
 using FestasInfantis.WinApp.ModuloItem;
 namespace FestasInfantis.WinApp.ModuloTema
 {
-    internal class ControladorTema(RepositorioTema repositorioTema, RepositorioItemEmMemoria repositorioItem) : ControladorBase
+    internal class ControladorTema(IRepositorioTema repositorioTema, RepositorioItemEmMemoria repositorioItem) : ControladorBase
     {
-        private RepositorioTema repositorioTema = repositorioTema;
+        private IRepositorioTema repositorioTema = repositorioTema;
         private TabelaTemaControl tabelaTemas;
         public int id = 1;
 
