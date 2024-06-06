@@ -14,7 +14,7 @@ namespace FestasInfantis.WinApp
         IRepositorioTema repositorioTema;
         IRepositorioItem repositorioItem;
         IRepositorioCliente repositorioCliente;
-        IRepositorioAluguel repositorioAluguel;
+        RepositorioAluguelEmMemoria repositorioAluguel;
 
         public static TelaPrincipalForm Instancia { get; private set; }
         public TelaPrincipalForm()
@@ -26,7 +26,7 @@ namespace FestasInfantis.WinApp
             repositorioTema = new RepositorioTemaEmArquivo();
             repositorioItem = new RepositorioItemEmArquivo();
             repositorioCliente = new RepositorioClienteEmArquivo();
-            repositorioAluguel = new RepositorioAluguelEmArquivo();
+            repositorioAluguel = new();
 
 
             Instancia = this;
