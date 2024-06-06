@@ -5,9 +5,9 @@ using FestasInfantis.WinApp.ModuloAluguel;
 using FestasInfantis.WinApp.ModuloCliente;
 namespace FestasInfantis.WinFormsApp.ModuloCliente
 {
-    internal class ControladorCliente(RepositorioCliente repositorioCliente) : ControladorBase, IControladorVisualizavel
+    internal class ControladorCliente(RepositorioClienteemMemoria repositorioCliente) : ControladorBase, IControladorVisualizavel
     {
-        private RepositorioCliente repositorioCliente = repositorioCliente;
+        private RepositorioClienteemMemoria repositorioCliente = repositorioCliente;
         private TabelaClienteControl tabelaCliente;
         private TabelaAlugueisDoCliente tabelaAlugueisDoCliente;
 

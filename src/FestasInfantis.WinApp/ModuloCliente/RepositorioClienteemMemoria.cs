@@ -1,7 +1,7 @@
 using eAgenda.ConsoleApp.Compartilhado;
 namespace FestasInfantis.WinApp.ModuloCliente
 {
-    public class RepositorioCliente : RepositorioBaseEmMemoria<Cliente>
+    public class RepositorioClienteemMemoria : RepositorioBaseEmMemoria<Cliente>, IRepositorioCliente
     { 
     }
 }
