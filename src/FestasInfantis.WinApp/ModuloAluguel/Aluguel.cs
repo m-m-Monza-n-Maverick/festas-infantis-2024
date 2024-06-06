@@ -1,19 +1,33 @@
 ﻿using eAgenda.ConsoleApp.Compartilhado;
 namespace FestasInfantis.WinApp.ModuloAluguel
 {
-    public class Aluguel (Cliente cliente, Tema tema, decimal porcentEntrada, decimal porcentDesconto, Festa festa) : EntidadeBase
+    public class Aluguel : EntidadeBase
     {
-        public Cliente Cliente { get; set; } = cliente;
-        public Tema Tema { get; set; } = tema;
-        public decimal PorcentEntrada { get; set; } = porcentEntrada;
-        public Festa Festa { get; set; } = festa;
+        public Cliente Cliente { get; set; } 
+        public Tema Tema { get; set; } 
+        public decimal PorcentEntrada { get; set; } 
+        public Festa Festa { get; set; } 
         public bool Concluido { get; set; } = false;
-        public decimal PorcentDesconto { get; set; } = porcentDesconto;
+        public decimal PorcentDesconto { get; set; } 
         public decimal ValorEntrada { get => Tema.Valor * PorcentEntrada; set { } }
         public decimal ValorTemaComDesconto { get => Tema.Valor * (1 - PorcentDesconto); set { } }
         public decimal ValorPendente { get => ValorTemaComDesconto - ValorEntrada; set { } }
 
         public DateTime DataPagam { get; set; }
+
+        public Aluguel()
+        {
+            
+        }
+
+        public Aluguel(Cliente cliente, Tema tema, decimal porcentEntrada, decimal porcentDesconto, Festa festa)
+        {
+            Cliente = cliente;
+            Tema = tema;
+            PorcentEntrada = porcentEntrada;
+            PorcentDesconto = porcentDesconto;
+            Festa = festa;
+        }
 
         public override void AtualizarRegistro(EntidadeBase novoRegistro)
         {

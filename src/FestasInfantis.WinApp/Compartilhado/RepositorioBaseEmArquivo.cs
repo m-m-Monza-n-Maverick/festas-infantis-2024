@@ -37,6 +37,7 @@ namespace FestasInfantis.WinApp.Compartilhado
             registro.AtualizarRegistro(novaEntidade);
 
             SerializarRegistros();
+
             return true;
         }
 
@@ -47,6 +48,7 @@ namespace FestasInfantis.WinApp.Compartilhado
             if (!conseguiuExcluir) return false;
 
             SerializarRegistros();
+
             return true;
         }
 
@@ -66,14 +68,15 @@ namespace FestasInfantis.WinApp.Compartilhado
         }
         protected void SerializarRegistros()
         {
-            FileInfo arquivo = new FileInfo(caminho);
+            FileInfo arquivo = new(caminho);
 
             arquivo.Directory.Create();
 
-            JsonSerializerOptions options = new JsonSerializerOptions()
+            JsonSerializerOptions options = new()
             {
                 WriteIndented = true,
-                ReferenceHandler = ReferenceHandler.Preserve
+                ReferenceHandler = ReferenceHandler.Preserve,
+                PropertyNameCaseInsensitive = true
             };
 
             byte[] resgistrosEmBytes = JsonSerializer.SerializeToUtf8Bytes(registros, options);
@@ -91,7 +94,8 @@ namespace FestasInfantis.WinApp.Compartilhado
 
             JsonSerializerOptions options = new JsonSerializerOptions()
             {
-                ReferenceHandler = ReferenceHandler.Preserve
+                ReferenceHandler = ReferenceHandler.Preserve,
+                PropertyNameCaseInsensitive = true
             };
 
             List<T> registros = JsonSerializer.Deserialize<List<T>>(registrosEmBytes, options);

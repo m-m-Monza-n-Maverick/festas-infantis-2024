@@ -4,15 +4,25 @@ using FestasInfantis.WinApp.ModuloAluguel;
 
 namespace FestasInfantis.WinApp
 {
-    public class Cliente(string nome, string telefone, string cPF) : EntidadeBase
+    public class Cliente : EntidadeBase
     {
-        public string Nome { get; set; } = nome;
-        public string Telefone { get; set; } = telefone;
-        public string CPF { get; set; } = cPF;
+        public string Nome { get; set; } 
+        public string Telefone { get; set; } 
+        public string CPF { get; set; } 
         public int NumDeAlugueis { get; set; } = 0;
         public List<Aluguel> Alugueis { get; set; } = [];
 
+        public Cliente()
+        {
+            
+        }
 
+        public Cliente(string nome, string telefone, string cPF)
+        {
+            Nome = nome;
+            Telefone = telefone;
+            CPF = cPF;
+        }
         public override List<string> Validar()
         {
 
