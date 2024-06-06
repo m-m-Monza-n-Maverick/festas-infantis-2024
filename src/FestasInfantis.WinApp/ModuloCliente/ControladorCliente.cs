@@ -1,16 +1,15 @@
-using System;
-using eAgenda.ConsoleApp.Compartilhado;
 using eAgenda.WinApp.Compartilhado;
 using FestasInfantis.WinApp;
+using FestasInfantis.WinApp.Compartilhado;
+using FestasInfantis.WinApp.ModuloAluguel;
 using FestasInfantis.WinApp.ModuloCliente;
-using FestasInfantis.WinApp.ModuloItem;
-using FestasInfantis.WinFormsApp.ModuloClientes;
 namespace FestasInfantis.WinFormsApp.ModuloCliente
 {
-    internal class ControladorCliente(IRepositorioCliente repositorioCliente) : ControladorBase
+    internal class ControladorCliente(RepositorioCliente repositorioCliente) : ControladorBase, IControladorVisualizavel
     {
-        private IRepositorioCliente repositorioCliente = repositorioCliente;
+        private RepositorioCliente repositorioCliente = repositorioCliente;
         private TabelaClienteControl tabelaCliente;
+        private TabelaAlugueisDoCliente tabelaAlugueisDoCliente;
 
         public int id = 1;
 
@@ -18,7 +17,7 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
         public override string ToolTipAdicionar { get { return "Cadadstar um novo cliente"; } }
         public override string ToolTipEditar { get { return "Editar um cliente"; } }
         public override string ToolTipExcluir { get { return "Excluir um cliente"; } }
-
+        public string ToolTipVisualizarAlugueis { get { return "Visualizar os alugueis de um cliente"; } }
 
         public override void Adicionar()
         {
@@ -26,7 +25,7 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
             DialogResult resultado = telaCliente.ShowDialog();
 
             if (resultado != DialogResult.OK) return;
-            
+
             Cliente novoCliente = telaCliente.Cliente;
 
             repositorioCliente.Cadastrar(novoCliente);
@@ -36,6 +35,7 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
             TelaPrincipalForm
                 .Instancia
                 .AtualizarRodape($"O registro \"{novoCliente.Nome}\" foi criado com sucesso!");
+
             id++;
         }
         public override void Editar()
@@ -66,19 +66,18 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
             Cliente clienteEditado = telaCliente.Cliente;
 
             repositorioCliente.Editar(clienteSelecionado.Id, clienteEditado);
-            
+
             CarregarClientes();
 
             TelaPrincipalForm
                 .Instancia
                 .AtualizarRodape($"O registro \"{clienteEditado.Nome}\" foi editado com sucesso!");
         }
-
         public override void Excluir()
         {
             int idSelecionado = tabelaCliente.ObterRegistroSelecionado();
 
-            Cliente clienteSelecionado = 
+            Cliente clienteSelecionado =
                 repositorioCliente.SelecionarPorId(idSelecionado);
 
             if (SemSeleção(clienteSelecionado)) return;
@@ -114,6 +113,17 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
                 .AtualizarRodape($"O registro \"{clienteSelecionado.Nome}\" foi excluído com sucesso!");
 
         }
+        public void VisualizarAlugueis()
+        {
+            int idSelecionado = tabelaCliente.ObterRegistroSelecionado();
+
+            Cliente clienteSelecionado = repositorioCliente.SelecionarPorId(idSelecionado);
+
+            if (SemSeleção(clienteSelecionado)) return;
+
+            tabelaAlugueisDoCliente.AtualizarRegistros(clienteSelecionado.Alugueis);
+        }
+
         public override UserControl ObterListagem()
         {
             if (tabelaCliente == null)
@@ -122,6 +132,21 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
             CarregarClientes();
 
             return tabelaCliente;
+        }
+        public override UserControl ObterListagemDeAlugueis()
+        {
+            tabelaAlugueisDoCliente ??= new TabelaAlugueisDoCliente();
+
+            /*            List<Aluguel> alugueis = [];
+
+                        foreach (Cliente cliente in repositorioCliente.SelecionarTodos())
+                            if (cliente.Alugueis != null)
+                                foreach (Aluguel aluguel in cliente.Alugueis)
+                                    alugueis.Add(aluguel);
+
+                        tabelaAlugueisDoCliente.AtualizarRegistros(alugueis);*/
+
+            return tabelaAlugueisDoCliente;
         }
         private void CarregarClientes()
         {
