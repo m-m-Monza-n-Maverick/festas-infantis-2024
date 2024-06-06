@@ -1,5 +1,5 @@
 ﻿using eAgenda.ConsoleApp.Compartilhado;
 namespace FestasInfantis.WinApp.ModuloItem
 {
-    public class RepositorioItem : RepositorioBase <Item> { }
+    public class RepositorioItem : RepositorioBaseEmMemoria <Item> { }
 }
