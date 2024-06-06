@@ -143,7 +143,7 @@
             Controls.Add(label1);
             Name = "TelaClienteForm";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "TelaClienteForm";
+            Text = "Cadastro Cliente";
             ResumeLayout(false);
             PerformLayout();
         }

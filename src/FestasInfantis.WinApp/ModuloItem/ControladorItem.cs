@@ -1,9 +1,9 @@
 ﻿using eAgenda.WinApp.Compartilhado;
 namespace FestasInfantis.WinApp.ModuloItem
 {
-    internal class ControladorItem(RepositorioItem repositorioItem) : ControladorBase
+    internal class ControladorItem(IRepositorioItem repositorioItem) : ControladorBase
     {
-        private RepositorioItem repositorioItem = repositorioItem;
+        private IRepositorioItem repositorioItem = repositorioItem;
         private TabelaItemControl tabelaItens;
         public int id = 1;
 

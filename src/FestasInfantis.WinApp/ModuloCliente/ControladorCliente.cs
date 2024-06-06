@@ -7,9 +7,9 @@ using FestasInfantis.WinApp.ModuloItem;
 using FestasInfantis.WinFormsApp.ModuloClientes;
 namespace FestasInfantis.WinFormsApp.ModuloCliente
 {
-    internal class ControladorCliente(RepositorioCliente repositorioCliente) : ControladorBase
+    internal class ControladorCliente(IRepositorioCliente repositorioCliente) : ControladorBase
     {
-        private RepositorioCliente repositorioCliente = repositorioCliente;
+        private IRepositorioCliente repositorioCliente = repositorioCliente;
         private TabelaClienteControl tabelaCliente;
 
         public int id = 1;
@@ -22,10 +22,10 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
 
         public override void Adicionar()
         {
-            TelaClienteForm telaCliente = new TelaClienteForm(id++);
+            TelaClienteForm telaCliente = new TelaClienteForm(id);
             DialogResult resultado = telaCliente.ShowDialog();
 
-            if (resultado != DialogResult.OK) { id--; return; } 
+            if (resultado != DialogResult.OK) return;
             
             Cliente novoCliente = telaCliente.Cliente;
 
@@ -36,7 +36,7 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
             TelaPrincipalForm
                 .Instancia
                 .AtualizarRodape($"O registro \"{novoCliente.Nome}\" foi criado com sucesso!");
-
+            id++;
         }
         public override void Editar()
         {

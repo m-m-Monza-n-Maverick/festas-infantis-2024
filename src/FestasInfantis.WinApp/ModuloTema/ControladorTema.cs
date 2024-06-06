@@ -2,9 +2,9 @@
 using FestasInfantis.WinApp.ModuloItem;
 namespace FestasInfantis.WinApp.ModuloTema
 {
-    internal class ControladorTema(RepositorioTema repositorioTema, RepositorioItem repositorioItem) : ControladorBase
+    internal class ControladorTema(IRepositorioTema repositorioTema, IRepositorioItem repositorioItem) : ControladorBase
     {
-        private RepositorioTema repositorioTema = repositorioTema;
+        private IRepositorioTema repositorioTema = repositorioTema;
         private TabelaTemaControl tabelaTemas;
         public int id = 1;
 
@@ -72,7 +72,6 @@ namespace FestasInfantis.WinApp.ModuloTema
                 () => repositorioTema.Excluir(temaSelecionado.Id),
                 temaSelecionado, "excluído");
         }
-
         #region Auxiliares
         public override UserControl ObterListagem()
         {
