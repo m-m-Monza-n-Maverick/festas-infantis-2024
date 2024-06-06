@@ -1,4 +1,5 @@
 using eAgenda.WinApp.Compartilhado;
+using FestasInfantis.WinApp.Compartilhado;
 using FestasInfantis.WinApp.ModuloAluguel;
 using FestasInfantis.WinApp.ModuloCliente;
 using FestasInfantis.WinApp.ModuloItem;
@@ -23,10 +24,10 @@ namespace FestasInfantis.WinApp
             lblTipoCadastro.Text = string.Empty;
 
             repositorioTema = new();
+            repositorioTema.Cadastrar(new("Tema", [new("Item", 50)]));
             repositorioItem = new();
-
             reposistoCliente = new();
-
+            reposistoCliente.Cadastrar(new("Cliente", "123", "123"));
             repositorioAluguel = new();
 
 
@@ -47,14 +48,27 @@ namespace FestasInfantis.WinApp
             => SelecionaModulo(ref controlador, () => controlador = new ControladorCliente(reposistoCliente));
 
 
-
         private void btnAdicionar_Click(object sender, EventArgs e)
             => controlador.Adicionar();
         private void btnEditar_Click(object sender, EventArgs e)
             => controlador.Editar();
         private void btnExcluir_Click(object sender, EventArgs e)
             => controlador.Excluir();
-
+        private void btnConfigurarDescontos_Click(object sender, EventArgs e)
+        {
+            if (controlador is IControladorDesconto controladorDesconto)
+                controladorDesconto.ConfigurarDescontos();
+        }
+        private void btnConcluirAluguel_Click(object sender, EventArgs e)
+        {
+            if (controlador is IControladorConcluivel controladorConcluivel)
+                controladorConcluivel.ConcluirAluguel();
+        }
+        private void btnVisualizarAlugueis_Click(object sender, EventArgs e)
+        {
+            if (controlador is IControladorVisualizavel controladorVisualizavel)
+                controladorVisualizavel.VisualizarAlugueis();
+        }
 
         #region Auxiliares
         private void SelecionaModulo(ref ControladorBase controlador, Action controladorSelecionado)
@@ -69,8 +83,10 @@ namespace FestasInfantis.WinApp
             btnAdicionar.Enabled = controladorSelecionado is ControladorBase;
             btnEditar.Enabled = controladorSelecionado is ControladorBase;
             btnExcluir.Enabled = controladorSelecionado is ControladorBase;
-
+            btnConfigurarDescontos.Enabled = controladorSelecionado is IControladorDesconto;
             btnFiltrar.Enabled = controladorSelecionado is IControladorFiltravel;
+            btnConcluirAluguel.Enabled = controladorSelecionado is IControladorConcluivel;
+            btnVisualizarAlugueis.Enabled = controladorSelecionado is IControladorVisualizavel;
 
             ConfigurarToolTips(controladorSelecionado);
         }
@@ -92,6 +108,5 @@ namespace FestasInfantis.WinApp
             pnlRegistros.Controls.Add(listagemContato);
         }
         #endregion
-
     }
 }

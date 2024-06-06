@@ -1,12 +1,15 @@
 using eAgenda.WinApp.Compartilhado;
 using FestasInfantis.WinApp;
+using FestasInfantis.WinApp.Compartilhado;
+using FestasInfantis.WinApp.ModuloAluguel;
 using FestasInfantis.WinApp.ModuloCliente;
 namespace FestasInfantis.WinFormsApp.ModuloCliente
 {
-    internal class ControladorCliente(RepositorioCliente repositorioCliente) : ControladorBase
+    internal class ControladorCliente(RepositorioCliente repositorioCliente) : ControladorBase, IControladorVisualizavel
     {
         private RepositorioCliente repositorioCliente = repositorioCliente;
         private TabelaClienteControl tabelaCliente;
+        private TabelaAlugueisDoCliente tabelaAlugueisDoCliente;
 
         public int id = 1;
 
@@ -70,7 +73,6 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
                 .Instancia
                 .AtualizarRodape($"O registro \"{clienteEditado.Nome}\" foi editado com sucesso!");
         }
-
         public override void Excluir()
         {
             int idSelecionado = tabelaCliente.ObterRegistroSelecionado();
@@ -111,9 +113,22 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
                 .AtualizarRodape($"O registro \"{clienteSelecionado.Nome}\" foi excluído com sucesso!");
 
         }
+        public void VisualizarAlugueis()
+        {
+            int idSelecionado = tabelaCliente.ObterRegistroSelecionado();
+
+            Cliente clienteSelecionado = repositorioCliente.SelecionarPorId(idSelecionado);
+
+            if (SemSeleção(clienteSelecionado)) return;
+
+            tabelaAlugueisDoCliente ??= new TabelaAlugueisDoCliente(clienteSelecionado);
+
+            tabelaAlugueisDoCliente.AtualizarRegistros();
+        }
+
         public override UserControl ObterListagem()
         {
-            if (tabelaCliente == null)
+            if (tabelaCliente == null) 
                 tabelaCliente = new TabelaClienteControl();
 
             CarregarClientes();

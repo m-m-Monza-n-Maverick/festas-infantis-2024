@@ -1,14 +1,14 @@
 ﻿using eAgenda.ConsoleApp.Compartilhado;
 namespace FestasInfantis.WinApp.ModuloAluguel
 {
-    public class Aluguel (Cliente cliente, Tema tema, decimal porcentEntrada, Festa festa) : EntidadeBase
+    public class Aluguel (Cliente cliente, Tema tema, decimal porcentEntrada, decimal porcentDesconto, Festa festa) : EntidadeBase
     {
         public Cliente Cliente { get; set; } = cliente;
         public Tema Tema { get; set; } = tema;
         public decimal PorcentEntrada { get; set; } = porcentEntrada;
         public Festa Festa { get; set; } = festa;
         public bool Concluido { get; set; } = false;
-        public int PorcentDesconto { get; set; } = 0;
+        public decimal PorcentDesconto { get; set; } = porcentDesconto;
         public decimal ValorEntrada { get => Tema.Valor * PorcentEntrada; set { } }
         public decimal ValorTemaComDesconto { get => Tema.Valor * (1 - PorcentDesconto); set { } }
         public decimal ValorPendente { get => ValorTemaComDesconto - ValorEntrada; set { } }
@@ -22,8 +22,10 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             Cliente = atualizado.Cliente;
             Tema = atualizado.Tema;
             PorcentEntrada = atualizado.PorcentEntrada;
-        }
-        public override List<string> Validar()
+            Festa = atualizado.Festa;
+            PorcentDesconto = atualizado.PorcentDesconto;
+    }
+    public override List<string> Validar()
         {
             List<string> erros = [];
 

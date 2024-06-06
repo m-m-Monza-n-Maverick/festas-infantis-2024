@@ -11,7 +11,6 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             grid.ConfigurarGridSomenteLeitura();
             grid.ConfigurarGridZebrado();
         }
-
         internal void AtualizarRegistros(List<Aluguel> alugueis)
         {
             grid.Rows.Clear();

@@ -6,10 +6,9 @@ namespace FestasInfantis.WinApp
     public class Cliente(string nome, string telefone, string cPF) : EntidadeBase
     {
         public string Nome { get; set; } = nome;
-        
         public string Telefone { get; set; } = telefone;
-
         public string CPF { get; set; } = cPF;
+        public int NumDeAlugueis { get; set; } = 0;
 
 
         public override List<string> Validar()

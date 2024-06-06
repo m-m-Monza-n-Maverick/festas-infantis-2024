@@ -1,6 +1,6 @@
 ﻿namespace FestasInfantis.WinApp.ModuloAluguel
 {
-    partial class TelaAluguelForm
+    partial class TelaConcluirAluguelForm
     {
         /// <summary>
         /// Required designer variable.
@@ -126,6 +126,7 @@
             // 
             // cmbEstado
             // 
+            cmbEstado.Enabled = false;
             cmbEstado.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbEstado.FormattingEnabled = true;
             cmbEstado.Location = new Point(320, 40);
@@ -135,13 +136,13 @@
             // 
             // txtNumero
             // 
+            txtNumero.Enabled = false;
             txtNumero.Font = new Font("Segoe UI", 9F);
             txtNumero.Location = new Point(320, 98);
             txtNumero.Name = "txtNumero";
             txtNumero.Size = new Size(81, 23);
             txtNumero.TabIndex = 7;
             txtNumero.TextAlign = HorizontalAlignment.Center;
-            txtNumero.KeyPress += txtNumero_KeyPress;
             // 
             // label9
             // 
@@ -155,6 +156,7 @@
             // 
             // txtBairro
             // 
+            txtBairro.Enabled = false;
             txtBairro.Font = new Font("Segoe UI", 9F);
             txtBairro.Location = new Point(59, 98);
             txtBairro.Name = "txtBairro";
@@ -173,6 +175,7 @@
             // 
             // txtRua
             // 
+            txtRua.Enabled = false;
             txtRua.Font = new Font("Segoe UI", 9F);
             txtRua.Location = new Point(59, 69);
             txtRua.Name = "txtRua";
@@ -181,6 +184,7 @@
             // 
             // txtCidade
             // 
+            txtCidade.Enabled = false;
             txtCidade.Font = new Font("Segoe UI", 9F);
             txtCidade.Location = new Point(59, 40);
             txtCidade.Name = "txtCidade";
@@ -235,6 +239,7 @@
             // 
             // mskHoraFim
             // 
+            mskHoraFim.Enabled = false;
             mskHoraFim.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             mskHoraFim.Location = new Point(134, 87);
             mskHoraFim.Mask = "00:00";
@@ -245,6 +250,7 @@
             // 
             // mskHoraInicio
             // 
+            mskHoraInicio.Enabled = false;
             mskHoraInicio.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             mskHoraInicio.Location = new Point(134, 58);
             mskHoraInicio.Mask = "00:00";
@@ -277,6 +283,7 @@
             // 
             dtpDataFesta.Checked = false;
             dtpDataFesta.CustomFormat = "dd/MM/yyyy";
+            dtpDataFesta.Enabled = false;
             dtpDataFesta.Font = new Font("Segoe UI", 9F);
             dtpDataFesta.Format = DateTimePickerFormat.Custom;
             dtpDataFesta.Location = new Point(134, 29);
@@ -285,7 +292,6 @@
             dtpDataFesta.Name = "dtpDataFesta";
             dtpDataFesta.Size = new Size(108, 23);
             dtpDataFesta.TabIndex = 0;
-            dtpDataFesta.ValueChanged += dtpDataFesta_ValueChanged;
             // 
             // label3
             // 
@@ -359,16 +365,15 @@
             btnAdicionar.Padding = new Padding(5);
             btnAdicionar.Size = new Size(38, 38);
             btnAdicionar.Text = "Calcular";
-            btnAdicionar.Click += btnAdicionar_Click;
             // 
             // toolStripLabel1
             // 
+            toolStripLabel1.Enabled = false;
             toolStripLabel1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             toolStripLabel1.ForeColor = SystemColors.ControlDarkDark;
             toolStripLabel1.Name = "toolStripLabel1";
             toolStripLabel1.Size = new Size(55, 37);
             toolStripLabel1.Text = "Calcular";
-            toolStripLabel1.Click += toolStripLabel1_Click;
             // 
             // txtValorPendente
             // 
@@ -478,6 +483,7 @@
             // 
             // cmbPercentEntrada
             // 
+            cmbPercentEntrada.Enabled = false;
             cmbPercentEntrada.FormattingEnabled = true;
             cmbPercentEntrada.Location = new Point(64, 59);
             cmbPercentEntrada.Name = "cmbPercentEntrada";
@@ -496,6 +502,7 @@
             // 
             // cmbTema
             // 
+            cmbTema.Enabled = false;
             cmbTema.FormattingEnabled = true;
             cmbTema.Location = new Point(284, 30);
             cmbTema.Name = "cmbTema";
@@ -514,6 +521,7 @@
             // 
             // cmbClientes
             // 
+            cmbClientes.Enabled = false;
             cmbClientes.FormattingEnabled = true;
             cmbClientes.Location = new Point(64, 30);
             cmbClientes.Name = "cmbClientes";
@@ -545,7 +553,7 @@
             btnGravar.Name = "btnGravar";
             btnGravar.Size = new Size(75, 23);
             btnGravar.TabIndex = 9;
-            btnGravar.Text = "Gravar";
+            btnGravar.Text = "Concluir";
             btnGravar.UseVisualStyleBackColor = true;
             btnGravar.Click += btnGravar_Click;
             // 
@@ -559,7 +567,7 @@
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             // 
-            // TelaAluguelForm
+            // TelaConcluirAluguelForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -572,7 +580,7 @@
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "TelaAluguelForm";
+            Name = "TelaConcluirAluguelForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Cadastro de Aluguel";
             tabControl1.ResumeLayout(false);
