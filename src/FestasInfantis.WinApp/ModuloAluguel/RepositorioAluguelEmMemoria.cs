@@ -2,16 +2,16 @@
 
 namespace FestasInfantis.WinApp.ModuloAluguel
 {
-    public class RepositorioAluguelEmMemoria : RepositorioBaseEmMemoria<Aluguel>, IRepositorioAluguel 
+    public class RepositorioAluguelEmMemoria : RepositorioBaseEmMemoria <Aluguel> 
     {
         public decimal PorcentDesconto { get; set; }
         public decimal PorcentMaxDesconto { get; set; } = 0.3m;
 
-        public List<Aluguel> SelecionarCompromissosPendentes()
+        internal List<Aluguel> SelecionarCompromissosPendentes()
             => registros
                 .FindAll(aluguel => !aluguel.Concluido);
 
-        public List<Aluguel> SelecionarCompromissosConcluidos()
+        internal List<Aluguel> SelecionarCompromissosConcluidos()
             => registros
                 .FindAll(aluguel => aluguel.Concluido);
     }

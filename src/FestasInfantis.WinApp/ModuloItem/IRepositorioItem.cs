@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FestasInfantis.WinApp.ModuloItem
 {
-    public interface IRepositorioItem
+    internal interface IRepositorioItem
     {
         void Cadastrar(Item novoItem);
         bool Editar(int id, Item itemEditado);
