@@ -2,11 +2,21 @@
 using eAgenda.WinApp.Compartilhado;
 namespace FestasInfantis.WinApp.ModuloItem
 {
-    public class Item(string descricao, int valor) : EntidadeBase
+    public class Item : EntidadeBase
     {
-        public string Descricao { get; set; } = descricao;
-        public int Valor { get; set; } = valor;
+        public string Descricao { get; set; } 
+        public int Valor { get; set; } 
         public Tema Tema { get; set; }
+
+        public Item()
+        {
+            
+        }
+        public Item(string descricao, int valor)
+        {
+            Descricao = descricao;
+            Valor = valor; 
+        }
 
         public override void AtualizarRegistro(EntidadeBase novoRegistro)
         {

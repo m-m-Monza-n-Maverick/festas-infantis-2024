@@ -3,11 +3,11 @@ using eAgenda.WinApp.Compartilhado;
 using FestasInfantis.WinApp.ModuloItem;
 namespace FestasInfantis.WinApp
 {
-    public class Tema (string nome, List<Item> itens) : EntidadeBase
+    public class Tema  : EntidadeBase
     {
         private int valor { get; set; }
-        public string Nome { get; set; } = nome;
-        public List<Item> Itens { get; set; } = itens;
+        public string Nome { get; set; } 
+        public List<Item> Itens { get; set; } 
         public int Valor 
         {
             get 
@@ -21,8 +21,16 @@ namespace FestasInfantis.WinApp
             }
             set => valor = value;
         }
+        public Tema()
+        {
+            
+        }
 
-
+        public Tema(string nome, List<Item> itens)
+        {
+            Nome = nome;
+            Itens = itens;
+        }
         public override void AtualizarRegistro(EntidadeBase novoRegistro)
         {
             Tema atualizado = (Tema)novoRegistro;
