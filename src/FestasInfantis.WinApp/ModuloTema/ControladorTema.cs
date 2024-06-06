@@ -2,7 +2,7 @@
 using FestasInfantis.WinApp.ModuloItem;
 namespace FestasInfantis.WinApp.ModuloTema
 {
-    internal class ControladorTema(RepositorioTema repositorioTema, RepositorioItem repositorioItem) : ControladorBase
+    internal class ControladorTema(RepositorioTema repositorioTema, RepositorioItemEmMemoria repositorioItem) : ControladorBase
     {
         private RepositorioTema repositorioTema = repositorioTema;
         private TabelaTemaControl tabelaTemas;
@@ -89,7 +89,7 @@ namespace FestasInfantis.WinApp.ModuloTema
 
             tabelaTemas.AtualizarRegistros(temas);
         }
-        private static void LiberaItem(RepositorioItem repositorioItem, Tema temaSelecionado)
+        private static void LiberaItem(RepositorioItemEmMemoria repositorioItem, Tema temaSelecionado)
         {
             foreach (Item item in repositorioItem.SelecionarTodos())
                 foreach (Item itemTema in temaSelecionado.Itens)
