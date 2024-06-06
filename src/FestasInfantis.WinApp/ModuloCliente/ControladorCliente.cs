@@ -9,7 +9,7 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
     {
         private IRepositorioCliente repositorioCliente = repositorioCliente;
         private TabelaClienteControl tabelaCliente;
-        private TabelaAlugueisDoCliente tabelaAlugueisDoCliente;
+        private TabelaAlugueisDoClienteControl tabelaAlugueisDoCliente;
 
         public int id = 1;
 
@@ -121,6 +121,8 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
 
             if (SemSeleção(clienteSelecionado)) return;
 
+            TelaPrincipalForm.Instancia.AtualizaLblTipoCadastro(clienteSelecionado.Nome);
+
             tabelaAlugueisDoCliente.AtualizarRegistros(clienteSelecionado.Alugueis);
         }
 
@@ -135,16 +137,7 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
         }
         public override UserControl ObterListagemDeAlugueis()
         {
-            tabelaAlugueisDoCliente ??= new TabelaAlugueisDoCliente();
-
-/*            List<Aluguel> alugueis = [];
-
-            foreach (Cliente cliente in repositorioCliente.SelecionarTodos())
-                if (cliente.Alugueis != null)
-                    foreach (Aluguel aluguel in cliente.Alugueis)
-                        alugueis.Add(aluguel);
-
-            tabelaAlugueisDoCliente.AtualizarRegistros(alugueis);*/
+            tabelaAlugueisDoCliente ??= new TabelaAlugueisDoClienteControl();
 
             return tabelaAlugueisDoCliente;
         }
