@@ -1,9 +1,10 @@
 ﻿using eAgenda.WinApp.Compartilhado;
+using FestasInfantis.WinApp.Compartilhado;
 using FestasInfantis.WinApp.ModuloCliente;
 using FestasInfantis.WinApp.ModuloTema;
 namespace FestasInfantis.WinApp.ModuloAluguel
 {
-    internal class ControladorAluguel (RepositorioAluguel repositorioAluguel, RepositorioCliente repositorioCliente,RepositorioTema repositorioTema) : ControladorBase
+    internal class ControladorAluguel (RepositorioAluguel repositorioAluguel, RepositorioCliente repositorioCliente,RepositorioTema repositorioTema) : ControladorBase, IControladorDesconto, IControladorConcluivel
     {
         private RepositorioAluguel repositorioAluguel = repositorioAluguel;
         private RepositorioCliente repositorioCliente = repositorioCliente;
@@ -16,11 +17,12 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         public override string ToolTipAdicionar { get => "Adicionar novo aluguel"; }
         public override string ToolTipEditar { get => "Editar aluguel existente"; }
         public override string ToolTipExcluir { get => "Excluir aluguel existente"; }
+        public string ToolTipConfigurarDescontos { get => "Configurar descontos"; }
         #endregion
 
         public override void Adicionar()
         {
-            TelaAluguelForm telaAluguel = new(id);
+            TelaAluguelForm telaAluguel = new(id, repositorioAluguel.PorcentDesconto, repositorioAluguel.PorcentMaxDesconto);
 
             CarregarClientes(telaAluguel);
             CarregarTemas(telaAluguel);
@@ -30,6 +32,8 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             if (resultado != DialogResult.OK) return;
 
             Aluguel novoAluguel = telaAluguel.Aluguel;
+
+            novoAluguel.PorcentDesconto = novoAluguel.Cliente.NumDeAlugueis * repositorioAluguel.PorcentDesconto;
 
             RealizaAcao(
                 () => repositorioAluguel.Cadastrar(novoAluguel),
@@ -42,7 +46,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             int idSelecionado = tabelaAlugueis.ObterRegistroSelecionado();
             Aluguel aluguelSelecionado = repositorioAluguel.SelecionarPorId(idSelecionado);
 
-            TelaAluguelForm telaAluguel = new(idSelecionado);
+            TelaAluguelForm telaAluguel = new(idSelecionado, repositorioAluguel.PorcentDesconto, repositorioAluguel.PorcentMaxDesconto);
 
             CarregarClientes(telaAluguel);
             CarregarTemas(telaAluguel);
@@ -56,6 +60,8 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             if (resultado != DialogResult.OK) return;
 
             Aluguel aluguelEditado = telaAluguel.Aluguel;
+
+            aluguelEditado.PorcentDesconto = aluguelEditado.Cliente.NumDeAlugueis * repositorioAluguel.PorcentDesconto;
 
             RealizaAcao(
                 () => repositorioAluguel.Editar(aluguelSelecionado.Id, aluguelEditado),
@@ -81,6 +87,42 @@ namespace FestasInfantis.WinApp.ModuloAluguel
                 () => repositorioAluguel.Excluir(aluguelSelecionado.Id),
                 aluguelSelecionado, "excluído");
         }
+        public void ConfigurarDescontos()
+        {
+            TelaDescontoForm telaDesconto = new(repositorioAluguel.PorcentDesconto, repositorioAluguel.PorcentMaxDesconto);
+
+            DialogResult resultado = telaDesconto.ShowDialog();
+
+            if (resultado != DialogResult.OK) return;
+
+            repositorioAluguel.PorcentDesconto = telaDesconto.porcentPorAluguel;
+            repositorioAluguel.PorcentMaxDesconto = telaDesconto.porcentDescontoMax;
+
+            AtualizaAlugueis();
+        }
+
+        public void ConcluirAluguel()
+        {
+            int idSelecionado = tabelaAlugueis.ObterRegistroSelecionado();
+            Aluguel aluguelSelecionado = repositorioAluguel.SelecionarPorId(idSelecionado);
+
+            if (SemSeleção(aluguelSelecionado)) return;
+
+            TelaConcluirAluguelForm telaAluguel = new(aluguelSelecionado);
+
+            telaAluguel.Aluguel = aluguelSelecionado;
+
+            DialogResult resultado = telaAluguel.ShowDialog();
+
+            aluguelSelecionado = telaAluguel.Aluguel;
+
+            if (resultado != DialogResult.OK) return;
+
+            RealizaAcao(
+                () => repositorioAluguel.Editar(aluguelSelecionado.Id, aluguelSelecionado),
+                aluguelSelecionado, "concluído");
+        }
+
 
         #region Auxiliares
         public override UserControl ObterListagem()
@@ -89,6 +131,21 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
             CarregarAlugueis();
             return tabelaAlugueis;
+        }
+        private void AtualizaAlugueis()
+        {
+            foreach (Aluguel aluguel in repositorioAluguel.SelecionarTodos())
+            {
+                decimal desconto = aluguel.Cliente.NumDeAlugueis * repositorioAluguel.PorcentDesconto;
+
+                if (desconto > repositorioAluguel.PorcentMaxDesconto) desconto = repositorioAluguel.PorcentMaxDesconto;
+
+                aluguel.PorcentDesconto = desconto;
+
+                repositorioAluguel.Editar(aluguel.Id, aluguel);
+            }
+
+            CarregarAlugueis();
         }
         private void CarregarAlugueis()
         {

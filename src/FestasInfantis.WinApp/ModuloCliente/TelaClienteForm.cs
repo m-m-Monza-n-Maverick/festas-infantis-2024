@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace FestasInfantis.WinApp.ModuloCliente
+﻿namespace FestasInfantis.WinApp.ModuloCliente
 {
     public partial class TelaClienteForm : Form
     {

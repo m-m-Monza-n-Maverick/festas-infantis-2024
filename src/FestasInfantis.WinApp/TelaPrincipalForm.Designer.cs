@@ -192,6 +192,7 @@
             btnVisualizarAlugueis.Name = "btnVisualizarAlugueis";
             btnVisualizarAlugueis.Padding = new Padding(5);
             btnVisualizarAlugueis.Size = new Size(38, 38);
+            btnVisualizarAlugueis.Click += btnVisualizarAlugueis_Click;
             // 
             // btnConcluirAluguel
             // 
@@ -203,6 +204,7 @@
             btnConcluirAluguel.Name = "btnConcluirAluguel";
             btnConcluirAluguel.Padding = new Padding(5);
             btnConcluirAluguel.Size = new Size(38, 38);
+            btnConcluirAluguel.Click += btnConcluirAluguel_Click;
             // 
             // btnConfigurarDescontos
             // 
@@ -214,6 +216,7 @@
             btnConfigurarDescontos.Name = "btnConfigurarDescontos";
             btnConfigurarDescontos.Padding = new Padding(5);
             btnConfigurarDescontos.Size = new Size(38, 38);
+            btnConfigurarDescontos.Click += btnConfigurarDescontos_Click;
             // 
             // toolStripSeparator4
             // 
