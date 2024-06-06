@@ -12,6 +12,7 @@ namespace eAgenda.WinApp.Compartilhado
         public abstract string ToolTipExcluir { get; }
 
         public abstract UserControl ObterListagem();
+        public virtual UserControl ObterListagemDeAlugueis() { return null; }
 
         public abstract void Adicionar();
         public abstract void Editar();
