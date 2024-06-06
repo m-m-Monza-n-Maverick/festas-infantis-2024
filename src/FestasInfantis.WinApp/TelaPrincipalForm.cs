@@ -11,9 +11,9 @@ namespace FestasInfantis.WinApp
     {
         ControladorBase controlador;
 
-        RepositorioTema repositorioTema;
-        RepositorioItem repositorioItem;
-        RepositorioCliente repositorioCliente;
+        IRepositorioTema repositorioTema;
+        IRepositorioItem repositorioItem;
+        IRepositorioCliente repositorioCliente;
         RepositorioAluguel repositorioAluguel;
 
         public static TelaPrincipalForm Instancia { get; private set; }
@@ -23,11 +23,9 @@ namespace FestasInfantis.WinApp
 
             lblTipoCadastro.Text = string.Empty;
 
-            repositorioTema = new();
-            repositorioTema.Cadastrar(new("Tema", [new("Item", 50)]));
-            repositorioItem = new();
-            repositorioCliente = new();
-            repositorioCliente.Cadastrar(new("Cliente", "123", "123"));
+            repositorioTema = new RepositorioTemaEmArquivo();
+            repositorioItem = new RepositorioItemEmArquivo();
+            repositorioCliente = new RepositorioClienteEmArquivo();
             repositorioAluguel = new();
 
 
