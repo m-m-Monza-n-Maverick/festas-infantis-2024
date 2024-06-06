@@ -15,7 +15,7 @@ namespace FestasInfantis.WinApp.ModuloTema
             }
         }
 
-        public TelaTemaForm(RepositorioItemEmMemoria repositorioItem, int id, Tema temaAtual)
+        public TelaTemaForm(IRepositorioItem repositorioItem, int id, Tema temaAtual)
         {
             InitializeComponent();
             txtId.Text = id.ToString();
@@ -47,7 +47,7 @@ namespace FestasInfantis.WinApp.ModuloTema
                 DialogResult = DialogResult.None;
             }
         }
-        private void ConfigurarListaDeItens(RepositorioItemEmMemoria repositorioItem, Tema temaAtual)
+        private void ConfigurarListaDeItens(IRepositorioItem repositorioItem, Tema temaAtual)
         {
             int i = 0;
 
