@@ -2,6 +2,8 @@
 {
     internal interface IControladorVisualizavel
     {
+        string ToolTipVisualizarAlugueis { get; }
+
         void VisualizarAlugueis();
     }
 }

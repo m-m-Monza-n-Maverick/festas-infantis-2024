@@ -17,7 +17,7 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
         public override string ToolTipAdicionar { get { return "Cadadstar um novo cliente"; } }
         public override string ToolTipEditar { get { return "Editar um cliente"; } }
         public override string ToolTipExcluir { get { return "Excluir um cliente"; } }
-
+        public string ToolTipVisualizarAlugueis { get { return "Visualizar os alugueis de um cliente"; } }
 
         public override void Adicionar()
         {
@@ -121,9 +121,7 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
 
             if (SemSeleção(clienteSelecionado)) return;
 
-            tabelaAlugueisDoCliente ??= new TabelaAlugueisDoCliente(clienteSelecionado);
-
-            tabelaAlugueisDoCliente.AtualizarRegistros();
+            tabelaAlugueisDoCliente.AtualizarRegistros(clienteSelecionado.Alugueis);
         }
 
         public override UserControl ObterListagem()
@@ -134,6 +132,21 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
             CarregarClientes();
 
             return tabelaCliente;
+        }
+        public override UserControl ObterListagemDeAlugueis()
+        {
+            tabelaAlugueisDoCliente ??= new TabelaAlugueisDoCliente();
+
+/*            List<Aluguel> alugueis = [];
+
+            foreach (Cliente cliente in repositorioCliente.SelecionarTodos())
+                if (cliente.Alugueis != null)
+                    foreach (Aluguel aluguel in cliente.Alugueis)
+                        alugueis.Add(aluguel);
+
+            tabelaAlugueisDoCliente.AtualizarRegistros(alugueis);*/
+
+            return tabelaAlugueisDoCliente;
         }
         private void CarregarClientes()
         {

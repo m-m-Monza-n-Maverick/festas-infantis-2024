@@ -1,5 +1,6 @@
 ﻿using eAgenda.ConsoleApp.Compartilhado;
 using eAgenda.WinApp.Compartilhado;
+using FestasInfantis.WinApp.ModuloAluguel;
 
 namespace FestasInfantis.WinApp
 {
@@ -9,6 +10,7 @@ namespace FestasInfantis.WinApp
         public string Telefone { get; set; } = telefone;
         public string CPF { get; set; } = cPF;
         public int NumDeAlugueis { get; set; } = 0;
+        public List<Aluguel> Alugueis { get; set; } = [];
 
 
         public override List<string> Validar()

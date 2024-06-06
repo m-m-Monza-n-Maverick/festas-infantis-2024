@@ -18,6 +18,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         public override string ToolTipEditar { get => "Editar aluguel existente"; }
         public override string ToolTipExcluir { get => "Excluir aluguel existente"; }
         public string ToolTipConfigurarDescontos { get => "Configurar descontos"; }
+        public string ToolTipConcluirAluguel { get => "Concluir um aluguel existente"; }
         #endregion
 
         public override void Adicionar()
@@ -38,6 +39,8 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             RealizaAcao(
                 () => repositorioAluguel.Cadastrar(novoAluguel),
                 novoAluguel, "criado");
+
+            novoAluguel.Cliente.Alugueis.Add(novoAluguel);
 
             id++;
         }
