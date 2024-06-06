@@ -40,6 +40,7 @@
         {
             aluguel.Concluido = true;
             aluguel.Cliente.NumDeAlugueis++;
+            aluguel.DataPagam = DateTime.Now;
         }
     }
 }

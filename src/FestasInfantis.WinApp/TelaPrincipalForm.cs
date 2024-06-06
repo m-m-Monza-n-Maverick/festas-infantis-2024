@@ -35,6 +35,7 @@ namespace FestasInfantis.WinApp
         }
 
         public void AtualizarRodape(string texto) => statusLabelPrincipal.Text = texto;
+        public void AtualizaLblTipoCadastro(string cliente) => lblTipoCadastro.Text = "Visualizando os alugueis do cliente: " + cliente;
 
 
         #region Seleção de módulo
@@ -72,6 +73,14 @@ namespace FestasInfantis.WinApp
 
             if (controlador is IControladorVisualizavel controladorVisualizavel)
                 controladorVisualizavel.VisualizarAlugueis();
+
+            if (!btnVisualizarAlugueis.Checked)
+                lblTipoCadastro.Text = "Cadastro de " + controlador.TipoCadastro;
+        }
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            if (controlador is IControladorFiltravel controladorFiltravel)
+                controladorFiltravel.Filtrar();
         }
         #endregion
 
@@ -80,6 +89,7 @@ namespace FestasInfantis.WinApp
         {
             controladorSelecionado();
             lblTipoCadastro.Text = "Cadastro de " + controlador.TipoCadastro;
+
             ConfigurarToolBox(controlador);
             ConfigurarListagem(controlador);
         }
@@ -93,6 +103,7 @@ namespace FestasInfantis.WinApp
             btnFiltrar.Enabled = controladorSelecionado is IControladorFiltravel;
             btnConcluirAluguel.Enabled = controladorSelecionado is IControladorConcluivel;
             btnVisualizarAlugueis.Enabled = controladorSelecionado is IControladorVisualizavel;
+            btnVisualizarAlugueis.Checked = false;
 
             ConfigurarToolTips(controladorSelecionado);
         }
@@ -100,7 +111,6 @@ namespace FestasInfantis.WinApp
         {
             if (btnVisualizarAlugueis.Checked)
             {
-                lblTipoCadastro.Text = "Cadastro de " + controlador.TipoCadastro;
                 btnVisualizarAlugueis.Checked = false;
                 btnAdicionar.Enabled = true;
                 btnEditar.Enabled = true;
@@ -108,13 +118,13 @@ namespace FestasInfantis.WinApp
             }
             else
             {
-                lblTipoCadastro.Text = "Visualizando os alugueis do cliente";
                 btnVisualizarAlugueis.Checked = true;
                 btnAdicionar.Enabled = false;
                 btnEditar.Enabled = false;
                 btnExcluir.Enabled = false;
             }
         }
+
         private void ConfigurarToolTips(ControladorBase controladorSelecionado)
         {
             btnAdicionar.ToolTipText = controladorSelecionado.ToolTipAdicionar;

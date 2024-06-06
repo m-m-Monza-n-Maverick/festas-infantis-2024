@@ -4,7 +4,7 @@ using FestasInfantis.WinApp.ModuloCliente;
 using FestasInfantis.WinApp.ModuloTema;
 namespace FestasInfantis.WinApp.ModuloAluguel
 {
-    internal class ControladorAluguel (RepositorioAluguel repositorioAluguel, RepositorioCliente repositorioCliente,RepositorioTema repositorioTema) : ControladorBase, IControladorDesconto, IControladorConcluivel
+    internal class ControladorAluguel (RepositorioAluguel repositorioAluguel, RepositorioCliente repositorioCliente,RepositorioTema repositorioTema) : ControladorBase, IControladorDesconto, IControladorConcluivel, IControladorFiltravel
     {
         private RepositorioAluguel repositorioAluguel = repositorioAluguel;
         private RepositorioCliente repositorioCliente = repositorioCliente;
@@ -19,6 +19,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         public override string ToolTipExcluir { get => "Excluir aluguel existente"; }
         public string ToolTipConfigurarDescontos { get => "Configurar descontos"; }
         public string ToolTipConcluirAluguel { get => "Concluir um aluguel existente"; }
+        public string ToolTipFiltrar { get => "Filtrar aluguéis"; }
         #endregion
 
         public override void Adicionar()
@@ -103,7 +104,6 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
             AtualizaAlugueis();
         }
-
         public void ConcluirAluguel()
         {
             int idSelecionado = tabelaAlugueis.ObterRegistroSelecionado();
@@ -124,6 +124,30 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             RealizaAcao(
                 () => repositorioAluguel.Editar(aluguelSelecionado.Id, aluguelSelecionado),
                 aluguelSelecionado, "concluído");
+        }
+        public void Filtrar()
+        {
+            TelaFiltroAlugueisForm telaFiltro = new();
+
+            DialogResult resultado = telaFiltro.ShowDialog();
+
+            if (resultado != DialogResult.OK) return;
+
+            TipoFiltroAluguelEnum filtroSelecionado = telaFiltro.FiltroSelecionado;
+
+            List<Aluguel> alugueisFiltrados;
+
+            if (filtroSelecionado == TipoFiltroAluguelEnum.Pendente)
+                alugueisFiltrados = repositorioAluguel.SelecionarCompromissosPendentes();
+
+            else if (filtroSelecionado == TipoFiltroAluguelEnum.Concluido)
+                alugueisFiltrados = repositorioAluguel.SelecionarCompromissosConcluidos();
+
+            else alugueisFiltrados = repositorioAluguel.SelecionarTodos();
+
+            tabelaAlugueis.AtualizarRegistros(alugueisFiltrados);
+
+            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {alugueisFiltrados.Count} registros");
         }
 
 

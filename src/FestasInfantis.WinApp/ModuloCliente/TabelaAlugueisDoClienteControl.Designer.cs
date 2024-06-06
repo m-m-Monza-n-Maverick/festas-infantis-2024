@@ -1,6 +1,6 @@
 ﻿namespace FestasInfantis.WinApp.ModuloCliente
 {
-    partial class TabelaAlugueisDoCliente
+    partial class TabelaAlugueisDoClienteControl
     {
         /// <summary> 
         /// Required designer variable.
