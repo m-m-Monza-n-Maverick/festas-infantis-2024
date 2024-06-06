@@ -4,11 +4,11 @@ using FestasInfantis.WinApp.ModuloCliente;
 using FestasInfantis.WinApp.ModuloTema;
 namespace FestasInfantis.WinApp.ModuloAluguel
 {
-    internal class ControladorAluguel (RepositorioAluguelEmMemoria repositorioAluguel, RepositorioClienteemMemoria repositorioCliente,RepositorioTema repositorioTema) : ControladorBase, IControladorDesconto, IControladorConcluivel
+    internal class ControladorAluguel (RepositorioAluguelEmMemoria repositorioAluguel, RepositorioClienteemMemoria repositorioCliente,RepositorioTemaEmMemoria repositorioTema) : ControladorBase, IControladorDesconto, IControladorConcluivel
     {
         private RepositorioAluguelEmMemoria repositorioAluguel = repositorioAluguel;
         private RepositorioClienteemMemoria repositorioCliente = repositorioCliente;
-        private RepositorioTema repositorioTema = repositorioTema;
+        private RepositorioTemaEmMemoria repositorioTema = repositorioTema;
         private TabelaAluguelControl tabelaAlugueis;
         public int id = 1;
 
