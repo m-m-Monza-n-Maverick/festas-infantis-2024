@@ -5,7 +5,6 @@ namespace FestasInfantis.WinApp.ModuloItem
     {
         private IRepositorioItem repositorioItem = repositorioItem;
         private TabelaItemControl tabelaItens;
-        public int id = 1;
 
         #region ToolTips
         public override string TipoCadastro { get => "Itens"; }
@@ -16,6 +15,8 @@ namespace FestasInfantis.WinApp.ModuloItem
 
         public override void Adicionar()
         {
+            int id = repositorioItem.PegarId();
+
             TelaItemForm telaItem = new(id);
             DialogResult resultado = telaItem.ShowDialog();
 

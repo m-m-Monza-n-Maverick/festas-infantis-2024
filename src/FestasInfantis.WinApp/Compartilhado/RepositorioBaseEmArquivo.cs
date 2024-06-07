@@ -6,11 +6,18 @@ namespace FestasInfantis.WinApp.Compartilhado
 {
     internal class RepositorioBaseEmArquivo<T> where T : EntidadeBase
     {
-        protected List<T> registros = new List<T>();
-
-        protected int contadorId = 1;
-
+        protected List<T> registros = [];
+        protected int contadorId //Baseado no Id do último item cadastrado
+        {
+            get
+            {
+                if (registros.Count != 0) return registros.Last().Id + 1;
+                return 1;
+            }
+            set { }
+        }
         private string caminho = string.Empty;
+
 
         public RepositorioBaseEmArquivo(string nomeArquivo)
         {
@@ -26,7 +33,6 @@ namespace FestasInfantis.WinApp.Compartilhado
 
             SerializarRegistros();
         }
-
         public bool Editar(int id, T novaEntidade)
         {
             T registro = SelecionarPorId(id);
@@ -40,7 +46,6 @@ namespace FestasInfantis.WinApp.Compartilhado
 
             return true;
         }
-
         public bool Excluir(int id)
         {
             bool conseguiuExcluir = registros.Remove(SelecionarPorId(id));
@@ -52,16 +57,16 @@ namespace FestasInfantis.WinApp.Compartilhado
             return true;
         }
 
+
         public List<T> SelecionarTodos()
         {
             return registros;
         }
-
         public T SelecionarPorId(int id)
         {
             return registros.Find(x => x.Id == id);
         }
-
+        public int PegarId() => contadorId;
         public bool Existe(int id)
         {
             return registros.Any(x => x.Id == id);

@@ -5,13 +5,12 @@ using FestasInfantis.WinApp.ModuloItem;
 using FestasInfantis.WinApp.ModuloTema;
 namespace FestasInfantis.WinApp.ModuloAluguel
 {
-    internal class ControladorAluguel (RepositorioAluguelEmMemoria repositorioAluguel, IRepositorioCliente repositorioCliente,IRepositorioTema repositorioTema) : ControladorBase, IControladorDesconto, IControladorConcluivel, IControladorFiltravel
+    internal class ControladorAluguel (IRepositorioAluguel repositorioAluguel, IRepositorioCliente repositorioCliente,IRepositorioTema repositorioTema) : ControladorBase, IControladorDesconto, IControladorConcluivel, IControladorFiltravel
     {
-        private RepositorioAluguelEmMemoria repositorioAluguel = repositorioAluguel;
+        private IRepositorioAluguel repositorioAluguel = repositorioAluguel;
         private IRepositorioCliente repositorioCliente = repositorioCliente;
         private IRepositorioTema repositorioTema = repositorioTema;
         private TabelaAluguelControl tabelaAlugueis;
-        public int id = 1;
 
         #region ToolTips
         public override string TipoCadastro { get => "Aluguéis"; }
@@ -25,6 +24,8 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
         public override void Adicionar()
         {
+            int id = repositorioAluguel.PegarId();
+
             TelaAluguelForm telaAluguel = new(id, repositorioAluguel.PorcentDesconto, repositorioAluguel.PorcentMaxDesconto);
 
             CarregarClientes(telaAluguel);
