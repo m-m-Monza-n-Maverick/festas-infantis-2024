@@ -2,8 +2,8 @@
 {
     public abstract class RepositorioBaseEmMemoria<T> where T : EntidadeBase
     {
-        protected List<T> registros = [];
         protected int contadorId = 1;
+        protected List<T> registros = [];
 
 
         public void Cadastrar(T novoRegistro)
@@ -24,11 +24,9 @@
         public bool Excluir(int id) => registros.Remove(SelecionarPorId(id));
 
 
-        public List<T> SelecionarTodos()
-        {
-            return registros;
-        }
+        public List<T> SelecionarTodos() => registros;
         public T SelecionarPorId(int id) => registros.Find(x => x.Id == id);
         public int PegarId() => contadorId;
+        public bool Existe(int id) => registros.Any(x => x.Id == id);
     }
 }
