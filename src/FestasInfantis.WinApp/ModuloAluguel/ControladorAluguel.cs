@@ -1,10 +1,11 @@
 ﻿using eAgenda.WinApp.Compartilhado;
 using FestasInfantis.WinApp.Compartilhado;
 using FestasInfantis.WinApp.ModuloCliente;
+using FestasInfantis.WinApp.ModuloItem;
 using FestasInfantis.WinApp.ModuloTema;
 namespace FestasInfantis.WinApp.ModuloAluguel
 {
-    internal class ControladorAluguel (RepositorioAluguelEmMemoria repositorioAluguel, IRepositorioCliente repositorioCliente,IRepositorioTema repositorioTema) : ControladorBase, IControladorDesconto, IControladorConcluivel
+    internal class ControladorAluguel (RepositorioAluguelEmMemoria repositorioAluguel, IRepositorioCliente repositorioCliente,IRepositorioTema repositorioTema) : ControladorBase, IControladorDesconto, IControladorConcluivel, IControladorFiltravel
     {
         private RepositorioAluguelEmMemoria repositorioAluguel = repositorioAluguel;
         private IRepositorioCliente repositorioCliente = repositorioCliente;
@@ -50,6 +51,8 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             int idSelecionado = tabelaAlugueis.ObterRegistroSelecionado();
             Aluguel aluguelSelecionado = repositorioAluguel.SelecionarPorId(idSelecionado);
 
+            if(AluguelConcluido(aluguelSelecionado)) return;
+
             TelaAluguelForm telaAluguel = new(idSelecionado, repositorioAluguel.PorcentDesconto, repositorioAluguel.PorcentMaxDesconto);
 
             CarregarClientes(telaAluguel);
@@ -71,6 +74,21 @@ namespace FestasInfantis.WinApp.ModuloAluguel
                 () => repositorioAluguel.Editar(aluguelSelecionado.Id, aluguelEditado),
                 aluguelEditado, "editado");
         }
+
+        private static bool AluguelConcluido(Aluguel aluguelSelecionado)
+        {
+            if (aluguelSelecionado.Concluido)
+            {
+                MessageBox.Show(
+                    "Não é possível editar um aluguel concluído",
+                    "Aviso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return true;
+            }
+            return false;
+        }
+
         public override void Excluir()
         {
             int idSelecionado = tabelaAlugueis.ObterRegistroSelecionado();

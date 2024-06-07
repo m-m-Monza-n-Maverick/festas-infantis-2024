@@ -33,7 +33,6 @@
             if (campoTestado == TimeSpan.Zero)
                 erros.Add($"\nO campo \"{mostraCampo}\" é obrigatório. Tente novamente ");
         }
-
         #endregion
     }
 }

@@ -1,5 +1,4 @@
 ﻿using eAgenda.ConsoleApp.Compartilhado;
-
 namespace FestasInfantis.WinApp.ModuloAluguel
 {
     public class RepositorioAluguelEmMemoria : RepositorioBaseEmMemoria <Aluguel> 

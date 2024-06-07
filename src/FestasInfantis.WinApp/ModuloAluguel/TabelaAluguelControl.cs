@@ -18,17 +18,11 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             foreach (Aluguel aluguel in alugueis)
             {
                 string concluido, valorPendente;
-                if (aluguel.Concluido)
-                {
-                    concluido = "Concluído";
-                    valorPendente = "0";
-                }
-                else
-                {
-                    concluido = "Aberto";
-                    valorPendente = aluguel.ValorPendente.ToString();
-                }
-                grid.Rows.Add(aluguel.Id, concluido, aluguel.Cliente, aluguel.Tema, aluguel.PorcentEntrada * 100, aluguel.Festa, valorPendente);
+
+                if (aluguel.Concluido) concluido = "Concluído";
+                else concluido = "Aberto";
+
+                grid.Rows.Add(aluguel.Id, concluido, aluguel.Cliente, aluguel.Tema, aluguel.PorcentEntrada * 100, aluguel.Festa, aluguel.ValorPendente);
             }
         }
 

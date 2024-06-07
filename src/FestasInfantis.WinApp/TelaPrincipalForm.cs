@@ -28,7 +28,6 @@ namespace FestasInfantis.WinApp
             repositorioCliente = new RepositorioClienteEmArquivo();
             repositorioAluguel = new();
 
-
             Instancia = this;
         }
 
@@ -122,7 +121,6 @@ namespace FestasInfantis.WinApp
                 btnExcluir.Enabled = false;
             }
         }
-
         private void ConfigurarToolTips(ControladorBase controladorSelecionado)
         {
             btnAdicionar.ToolTipText = controladorSelecionado.ToolTipAdicionar;
