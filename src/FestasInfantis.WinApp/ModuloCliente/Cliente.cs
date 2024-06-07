@@ -34,11 +34,11 @@ namespace FestasInfantis.WinApp
             if (string.IsNullOrEmpty(Telefone.Trim()))
                 erros.Add("O campo \"Telefone\" é obrigatório");
 
-            //if (CPF.Length != 11)
-                //erros.Add("O campo \"CPF\" está incorreto");
+            if (CPF.Length != 11)
+                erros.Add("O campo \"CPF\" está incorreto");
 
-            //if (Telefone.Length != 11)
-                //erros.Add("O campo \"Telefone\" está incorreto");
+            if (Telefone.Length != 11)
+                erros.Add("O campo \"Telefone\" está incorreto");
 
             if (string.IsNullOrEmpty(CPF.Trim()))
                 erros.Add("O campo \"CPF\" é obrigatório");
