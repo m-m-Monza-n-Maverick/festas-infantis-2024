@@ -21,31 +21,14 @@
             registro.AtualizarRegistro(novaEntidade);
             return true;
         }
-        public bool Excluir(int id)
-        {
-            return registros.Remove(SelecionarPorId(id));
-        }
+        public bool Excluir(int id) => registros.Remove(SelecionarPorId(id));
 
 
         public List<T> SelecionarTodos()
         {
             return registros;
         }
-        public T SelecionarPorId(int id)
-        {
-            return registros.Find(x => x.Id == id);
-        }
-        public bool Existe(int id)
-        {
-            return registros.Any(x => x.Id == id);
-        }
-        public void CadastrarVarios(List<T> registrosAdicionados)
-        {
-            foreach (T registro in registrosAdicionados)
-            {
-                registro.Id = contadorId++;
-                registros.Add(registro);
-            }
-        }
+        public T SelecionarPorId(int id) => registros.Find(x => x.Id == id);
+        public int PegarId() => contadorId;
     }
 }

@@ -1,7 +1,6 @@
 using eAgenda.WinApp.Compartilhado;
 using FestasInfantis.WinApp;
 using FestasInfantis.WinApp.Compartilhado;
-using FestasInfantis.WinApp.ModuloAluguel;
 using FestasInfantis.WinApp.ModuloCliente;
 namespace FestasInfantis.WinFormsApp.ModuloCliente
 {
@@ -11,8 +10,6 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
         private TabelaClienteControl tabelaCliente;
         private TabelaAlugueisDoClienteControl tabelaAlugueisDoCliente;
 
-        public int id = 1;
-
         public override string TipoCadastro { get { return "Clientes"; } }
         public override string ToolTipAdicionar { get { return "Cadadstar um novo cliente"; } }
         public override string ToolTipEditar { get { return "Editar um cliente"; } }
@@ -21,6 +18,8 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
 
         public override void Adicionar()
         {
+            int id = repositorioCliente.PegarId();
+
             TelaClienteForm telaCliente = new TelaClienteForm(id);
             DialogResult resultado = telaCliente.ShowDialog();
 

@@ -7,7 +7,6 @@ namespace FestasInfantis.WinApp.ModuloTema
         private IRepositorioTema repositorioTema = repositorioTema;
         private IRepositorioItem repositorioItem = repositorioItem;
         private TabelaTemaControl tabelaTemas;
-        public int id = repositorioTema.SelecionarTodos().Last().Id + 1;
 
         #region ToolTips
         public override string TipoCadastro { get => "Temas"; }
@@ -18,6 +17,7 @@ namespace FestasInfantis.WinApp.ModuloTema
 
         public override void Adicionar()
         {
+            int id = repositorioTema.PegarId();
             TelaTemaForm telaTema = new(repositorioItem, id, null);
             DialogResult resultado = telaTema.ShowDialog();
 
@@ -28,8 +28,6 @@ namespace FestasInfantis.WinApp.ModuloTema
             RealizaAcao(
                 () => repositorioTema.Cadastrar(novoTema),
                 novoTema, "criado");
-
-            id++;
         }
         public override void Editar()
         {

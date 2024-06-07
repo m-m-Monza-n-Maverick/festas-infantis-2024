@@ -7,5 +7,6 @@
         bool Excluir(int id);
         Tema SelecionarPorId(int idSelecionado);
         List<Tema> SelecionarTodos();
+        int PegarId();
     }
 }
