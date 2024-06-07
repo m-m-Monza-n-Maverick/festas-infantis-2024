@@ -4,7 +4,6 @@ namespace FestasInfantis.WinApp.ModuloCliente
 {
     public partial class TabelaAlugueisDoClienteControl : UserControl
     {
-        Cliente clienteSelecionado;
         public TabelaAlugueisDoClienteControl()
         {
             InitializeComponent();
@@ -22,27 +21,19 @@ namespace FestasInfantis.WinApp.ModuloCliente
 
             foreach (Aluguel aluguel in alugueis)
             {
-                string concluido, valorPendente, dataPagamento;
+                string concluido = "Pendente", dataPagamento = "";
+
                 if (aluguel.Concluido)
                 {
                     concluido = "Concluído";
-                    valorPendente = "0";
                     dataPagamento = aluguel.DataPagam.ToShortDateString();
                 }
-                else
-                {
-                    concluido = "Aberto";
-                    valorPendente = aluguel.ValorPendente.ToString();
-                    dataPagamento = "-";
-                }
-                grid.Rows.Add(aluguel.Id, concluido, aluguel.Tema, valorPendente, dataPagamento);
+
+                grid.Rows.Add(aluguel.Id, concluido, aluguel.Tema, aluguel.ValorPendente, dataPagamento);
             }
         }
-
-        public int ObterRegistroSelecionado() => grid.SelecionarId();
-
         private DataGridViewColumn[] ObterColunas()
-        {
+        { 
             return 
             [ 
                 new DataGridViewTextBoxColumn { DataPropertyName = "Id", HeaderText = "Id" },

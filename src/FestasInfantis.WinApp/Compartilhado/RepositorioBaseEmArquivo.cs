@@ -6,18 +6,19 @@ namespace FestasInfantis.WinApp.Compartilhado
 {
     internal class RepositorioBaseEmArquivo<T> where T : EntidadeBase
     {
-        protected List<T> registros = [];
         protected int contadorId //Baseado no Id do último item cadastrado
         {
             get
             {
+                if (backupId != 0) return backupId;
                 if (registros.Count != 0) return registros.Last().Id + 1;
                 return 1;
             }
             set { }
         }
+        private int backupId; //Caso o último registro seja excluído
+        protected List<T> registros = [];
         private string caminho = string.Empty;
-
 
         public RepositorioBaseEmArquivo(string nomeArquivo)
         {
@@ -25,9 +26,12 @@ namespace FestasInfantis.WinApp.Compartilhado
 
             registros = DeserializarRegistros();
         }
+
+
         public void Cadastrar(T novoRegistro)
         {
             novoRegistro.Id = contadorId++;
+            backupId = 0;
 
             registros.Add(novoRegistro);
 
@@ -48,6 +52,8 @@ namespace FestasInfantis.WinApp.Compartilhado
         }
         public bool Excluir(int id)
         {
+            if (SelecionarPorId(id) == registros.Last()) backupId = contadorId;
+
             bool conseguiuExcluir = registros.Remove(SelecionarPorId(id));
 
             if (!conseguiuExcluir) return false;
@@ -58,19 +64,12 @@ namespace FestasInfantis.WinApp.Compartilhado
         }
 
 
-        public List<T> SelecionarTodos()
-        {
-            return registros;
-        }
-        public T SelecionarPorId(int id)
-        {
-            return registros.Find(x => x.Id == id);
-        }
+        public List<T> SelecionarTodos() => registros;
+        public T SelecionarPorId(int id) => registros.Find(x => x.Id == id);
         public int PegarId() => contadorId;
-        public bool Existe(int id)
-        {
-            return registros.Any(x => x.Id == id);
-        }
+        public bool Existe(int id) => registros.Any(x => x.Id == id);
+
+        #region JSON
         protected void SerializarRegistros()
         {
             FileInfo arquivo = new(caminho);
@@ -107,5 +106,6 @@ namespace FestasInfantis.WinApp.Compartilhado
 
             return registros;
         }
+        #endregion
     }
 }
