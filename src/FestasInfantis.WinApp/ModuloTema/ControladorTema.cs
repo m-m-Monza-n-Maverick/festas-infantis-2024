@@ -7,7 +7,7 @@ namespace FestasInfantis.WinApp.ModuloTema
         private IRepositorioTema repositorioTema = repositorioTema;
         private IRepositorioItem repositorioItem = repositorioItem;
         private TabelaTemaControl tabelaTemas;
-        public int id = 1;
+        public int id = repositorioTema.SelecionarTodos().Last().Id + 1;
 
         #region ToolTips
         public override string TipoCadastro { get => "Temas"; }
