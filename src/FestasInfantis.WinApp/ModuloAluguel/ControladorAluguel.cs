@@ -39,11 +39,11 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
             novoAluguel.PorcentDesconto = novoAluguel.Cliente.NumDeAlugueis * repositorioAluguel.PorcentDesconto;
 
+            AdicionarAluguelDoCliente(novoAluguel);
+
             RealizaAcao(
                 () => repositorioAluguel.Cadastrar(novoAluguel),
                 novoAluguel, "criado");
-
-            novoAluguel.Cliente.Alugueis.Add(novoAluguel);
 
             id++;
         }
@@ -52,7 +52,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             int idSelecionado = tabelaAlugueis.ObterRegistroSelecionado();
             Aluguel aluguelSelecionado = repositorioAluguel.SelecionarPorId(idSelecionado);
 
-            if(AluguelConcluido(aluguelSelecionado)) return;
+            if (AluguelConcluido(aluguelSelecionado)) return;
 
             TelaAluguelForm telaAluguel = new(idSelecionado, repositorioAluguel.PorcentDesconto, repositorioAluguel.PorcentMaxDesconto);
 
@@ -71,25 +71,12 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
             aluguelEditado.PorcentDesconto = aluguelEditado.Cliente.NumDeAlugueis * repositorioAluguel.PorcentDesconto;
 
+            EditarAluguelDoCliente(aluguelSelecionado, aluguelEditado);
+
             RealizaAcao(
                 () => repositorioAluguel.Editar(aluguelSelecionado.Id, aluguelEditado),
                 aluguelEditado, "editado");
         }
-
-        private static bool AluguelConcluido(Aluguel aluguelSelecionado)
-        {
-            if (aluguelSelecionado.Concluido)
-            {
-                MessageBox.Show(
-                    "Não é possível editar um aluguel concluído",
-                    "Aviso",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                return true;
-            }
-            return false;
-        }
-
         public override void Excluir()
         {
             int idSelecionado = tabelaAlugueis.ObterRegistroSelecionado();
@@ -106,6 +93,8 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
             if (resposta != DialogResult.Yes) return;
 
+            RemoverAluguelDoCliente(aluguelSelecionado);
+
             RealizaAcao(
                 () => repositorioAluguel.Excluir(aluguelSelecionado.Id),
                 aluguelSelecionado, "excluído");
@@ -121,7 +110,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             repositorioAluguel.PorcentDesconto = telaDesconto.porcentPorAluguel;
             repositorioAluguel.PorcentMaxDesconto = telaDesconto.porcentDescontoMax;
 
-            AtualizaAlugueis();
+            AtualizaDesconto();
         }
         public void ConcluirAluguel()
         {
@@ -139,6 +128,8 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             aluguelSelecionado = telaAluguel.Aluguel;
 
             if (resultado != DialogResult.OK) return;
+
+            ConcluirAluguelCliente(aluguelSelecionado);
 
             RealizaAcao(
                 () => repositorioAluguel.Editar(aluguelSelecionado.Id, aluguelSelecionado),
@@ -178,7 +169,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             CarregarAlugueis();
             return tabelaAlugueis;
         }
-        private void AtualizaAlugueis()
+        private void AtualizaDesconto()
         {
             foreach (Aluguel aluguel in repositorioAluguel.SelecionarTodos())
             {
@@ -199,17 +190,18 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
             tabelaAlugueis.AtualizarRegistros(alugueis);
         }
-        private void CarregarTemas(TelaAluguelForm telaAluguel)
+        private bool AluguelConcluido(Aluguel aluguelSelecionado)
         {
-            List<Tema> temasCadastrados = repositorioTema.SelecionarTodos();
-            if (temasCadastrados.Count == 0) temasCadastrados = [new("", [])];
-            telaAluguel.CarregarTemas(temasCadastrados);
-        }
-        private void CarregarClientes(TelaAluguelForm telaAluguel)
-        {
-            List<Cliente> clientesCadastrados = repositorioCliente.SelecionarTodos();
-            if (clientesCadastrados.Count == 0) clientesCadastrados = [new("Não há clientes...", "", "")];
-            telaAluguel.CarregarClientes(clientesCadastrados);
+            if (aluguelSelecionado.Concluido)
+            {
+                MessageBox.Show(
+                    "Não é possível editar um aluguel concluído",
+                    "Aviso",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return true;
+            }
+            return false;
         }
         private void CarregaMensagem(Aluguel aluguel, string texto)
         {
@@ -223,6 +215,60 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             CarregarAlugueis();
             CarregaMensagem(aluguel, texto);
         }
+
+        #region Clientes
+        private void CarregarClientes(TelaAluguelForm telaAluguel)
+        {
+            List<Cliente> clientesCadastrados = repositorioCliente.SelecionarTodos();
+            if (clientesCadastrados.Count == 0) clientesCadastrados = [new("Não há clientes...", "", "")];
+            telaAluguel.CarregarClientes(clientesCadastrados);
+        }
+        private void AdicionarAluguelDoCliente(Aluguel novoAluguel)
+        {
+            novoAluguel.Cliente.Alugueis.Add(novoAluguel);
+            repositorioCliente.Editar(novoAluguel.Cliente.Id, novoAluguel.Cliente);
+        }
+        private void EditarAluguelDoCliente(Aluguel aluguelSelecionado, Aluguel aluguelEditado)
+        {
+            if (aluguelEditado.Cliente != aluguelSelecionado.Cliente)
+            {
+                aluguelEditado.Id = aluguelSelecionado.Id;
+
+                aluguelEditado.Cliente.Alugueis.Add(aluguelEditado);
+                aluguelSelecionado.Cliente.Alugueis.Remove(aluguelSelecionado);
+
+                repositorioCliente.Editar(aluguelEditado.Cliente.Id, aluguelEditado.Cliente);
+                repositorioCliente.Editar(aluguelSelecionado.Cliente.Id, aluguelSelecionado.Cliente);
+            }
+        }
+        private void RemoverAluguelDoCliente(Aluguel aluguel)
+        {
+            aluguel.Cliente.Alugueis.Remove(aluguel);
+            repositorioCliente.Editar(aluguel.Cliente.Id, aluguel.Cliente);
+        }
+        private void ConcluirAluguelCliente(Aluguel aluguelSelecionado)
+        {
+            List<Aluguel> alugueisCliente = aluguelSelecionado.Cliente.Alugueis;
+
+            foreach (Aluguel aluguel in alugueisCliente)
+                if (aluguel.Id == aluguelSelecionado.Id)
+                {
+                    aluguelSelecionado.Cliente.Alugueis.Remove(aluguel);
+                    aluguelSelecionado.Cliente.Alugueis.Add(aluguelSelecionado);
+                    repositorioCliente.Editar(aluguelSelecionado.Cliente.Id, aluguelSelecionado.Cliente);
+                }
+        }
+        #endregion
+
+        #region Temas
+        private void CarregarTemas(TelaAluguelForm telaAluguel)
+        {
+            List<Tema> temasCadastrados = repositorioTema.SelecionarTodos();
+            if (temasCadastrados.Count == 0) temasCadastrados = [new("", [])];
+            telaAluguel.CarregarTemas(temasCadastrados);
+        }
+        #endregion
+
         #endregion
     }
 }

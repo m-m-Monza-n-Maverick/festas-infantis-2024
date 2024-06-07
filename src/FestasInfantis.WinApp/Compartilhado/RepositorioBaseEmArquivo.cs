@@ -16,13 +16,13 @@ namespace FestasInfantis.WinApp.Compartilhado
             }
             set { }
         }
-        private int backupId; //Caso o último registro seja excluído
+        protected int backupId; //Caso o último registro seja excluído
         protected List<T> registros = [];
         private string caminho = string.Empty;
 
         public RepositorioBaseEmArquivo(string nomeArquivo)
         {
-            caminho = $"C:\\temp\\eAgenda\\{nomeArquivo}";
+            caminho = $"C:\\temp\\FestasInfantis\\{nomeArquivo}";
 
             registros = DeserializarRegistros();
         }

@@ -90,6 +90,7 @@
             txtTelefone.Name = "txtTelefone";
             txtTelefone.Size = new Size(181, 23);
             txtTelefone.TabIndex = 2;
+            txtTelefone.MaxLength = 11;
             txtTelefone.KeyPress += txtTelefone_KeyPress;
             // 
             // txtNome
@@ -105,6 +106,7 @@
             txtCPF.Name = "txtCPF";
             txtCPF.Size = new Size(181, 23);
             txtCPF.TabIndex = 1;
+            txtCPF.MaxLength = 11;
             txtCPF.KeyPress += txtCPF_KeyPress;
             // 
             // btnCancelar
