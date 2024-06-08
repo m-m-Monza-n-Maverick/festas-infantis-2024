@@ -10,5 +10,6 @@
         Item SelecionarPorId(int idSelecionado);
         List<Item> SelecionarTodos();
         int PegarId();
+        void Atualizar();
     }
 }

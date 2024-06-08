@@ -10,5 +10,6 @@
         Cliente SelecionarPorId(int idSelecionado);
         List<Cliente> SelecionarTodos();
         int PegarId();
+        void Atualizar();
     }
 }

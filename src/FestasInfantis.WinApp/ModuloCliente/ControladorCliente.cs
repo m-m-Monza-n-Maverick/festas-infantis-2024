@@ -11,7 +11,7 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
         private TabelaAlugueisDoClienteControl tabelaAlugueisDoCliente;
 
         public override string TipoCadastro { get { return "Clientes"; } }
-        public override string ToolTipAdicionar { get { return "Cadadstar um novo cliente"; } }
+        public override string ToolTipAdicionar { get { return "Cadastrar um novo cliente"; } }
         public override string ToolTipEditar { get { return "Editar um cliente"; } }
         public override string ToolTipExcluir { get { return "Excluir um cliente"; } }
         public string ToolTipVisualizarAlugueis { get { return "Visualizar os alugueis de um cliente"; } }
@@ -76,32 +76,11 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
         {
             int idSelecionado = tabelaCliente.ObterRegistroSelecionado();
 
-            Cliente clienteSelecionado = 
-                repositorioCliente.SelecionarPorId(idSelecionado);
+            Cliente clienteSelecionado = repositorioCliente.SelecionarPorId(idSelecionado);
 
             if (SemSeleção(clienteSelecionado)) return;
 
-            if (clienteSelecionado == null)
-            {
-                MessageBox.Show(
-                    "Não é possível realizar esta ação sem um registro selecionado.",
-                    "Aviso",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-                return;
-            }
-
-            DialogResult resposta = MessageBox.Show
-                (
-                $"Você deseja realmente excluir o registro \"{clienteSelecionado.Nome}\"?",
-                "Confirmar Exclusão",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-                );
-
-            if (resposta != DialogResult.Yes)
-                return;
+            if (!DesejaRealmenteExcluir(clienteSelecionado)) return;
 
             repositorioCliente.Excluir(clienteSelecionado.Id);
 
@@ -110,7 +89,6 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
             TelaPrincipalForm
                 .Instancia
                 .AtualizarRodape($"O registro \"{clienteSelecionado.Nome}\" foi excluído com sucesso!");
-
         }
         public void VisualizarAlugueis()
         {

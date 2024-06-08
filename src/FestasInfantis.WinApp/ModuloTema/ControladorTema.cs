@@ -25,6 +25,12 @@ namespace FestasInfantis.WinApp.ModuloTema
 
             Tema novoTema = telaTema.Tema;
 
+            foreach(Item item in novoTema.Itens)
+            {
+                item.Tema = novoTema;
+                repositorioItem.Editar(item.Id, item);
+            }
+
             RealizaAcao(
                 () => repositorioTema.Cadastrar(novoTema),
                 novoTema, "criado");
@@ -35,9 +41,9 @@ namespace FestasInfantis.WinApp.ModuloTema
 
             Tema temaSelecionado = repositorioTema.SelecionarPorId(idSelecionado);
 
-            TelaTemaForm telaTema = new(repositorioItem, idSelecionado, temaSelecionado);
-
             if (SemSeleção(temaSelecionado)) return;
+
+            TelaTemaForm telaTema = new(repositorioItem, idSelecionado, temaSelecionado);
 
             telaTema.Tema = temaSelecionado;
 
@@ -46,6 +52,7 @@ namespace FestasInfantis.WinApp.ModuloTema
             if (resultado != DialogResult.OK) return;
 
             Tema temaEditado = telaTema.Tema;
+            temaEditado.Id = idSelecionado;
 
             RealizaAcao(
                 () => repositorioTema.Editar(temaSelecionado.Id, temaEditado),

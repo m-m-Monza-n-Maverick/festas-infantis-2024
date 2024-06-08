@@ -3,31 +3,36 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 {
     public class Aluguel : EntidadeBase
     {
-        public Cliente Cliente { get; set; } 
-        public Tema Tema { get; set; } 
-        public decimal PorcentEntrada { get; set; } 
-        public Festa Festa { get; set; } 
+        public Cliente Cliente { get; set; }
+        public Tema Tema { get; set; }
+        public decimal PorcentEntrada { get; set; }
+        public Festa Festa { get; set; }
         public bool Concluido { get; set; } = false;
-        public decimal PorcentDesconto { get; set; } 
+        public decimal PorcentDesconto { get; set; }
         public decimal ValorEntrada { get => Tema.Valor * PorcentEntrada; set { } }
         public decimal ValorTemaComDesconto { get => Tema.Valor * (1 - PorcentDesconto); set { } }
-        public decimal ValorPendente { get => ValorTemaComDesconto - ValorEntrada; set { } }
-
+        public decimal ValorPendente 
+        { 
+            get
+            {
+                if (Concluido) return 0;
+                return ValorTemaComDesconto - ValorEntrada;
+            }
+            set { } 
+        }
         public DateTime DataPagam { get; set; }
 
-        public Aluguel()
-        {
-            
-        }
 
+        public Aluguel() { }
         public Aluguel(Cliente cliente, Tema tema, decimal porcentEntrada, decimal porcentDesconto, Festa festa)
         {
             Cliente = cliente;
             Tema = tema;
             PorcentEntrada = porcentEntrada;
-            PorcentDesconto = porcentDesconto;
             Festa = festa;
+            PorcentDesconto = porcentDesconto;
         }
+
 
         public override void AtualizarRegistro(EntidadeBase novoRegistro)
         {
@@ -39,7 +44,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             Festa = atualizado.Festa;
             PorcentDesconto = atualizado.PorcentDesconto;
     }
-    public override List<string> Validar()
+        public override List<string> Validar()
         {
             List<string> erros = [];
 
