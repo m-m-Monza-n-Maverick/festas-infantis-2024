@@ -32,5 +32,16 @@ namespace eAgenda.WinApp.Compartilhado
             }
             return false;
         }
+        public bool DesejaRealmenteExcluir(EntidadeBase entidadeSelecionada)
+        {
+            DialogResult resposta = MessageBox.Show(
+                $"Você deseja realmente excluir o registro \"{entidadeSelecionada}\"?",
+                $"Confirmar exclusão",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (resposta != DialogResult.Yes) return false;
+            return true;
+        }
     }
 }

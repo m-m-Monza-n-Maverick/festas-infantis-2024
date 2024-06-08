@@ -8,5 +8,6 @@
         Tema SelecionarPorId(int idSelecionado);
         List<Tema> SelecionarTodos();
         int PegarId();
+        void Atualizar();
     }
 }

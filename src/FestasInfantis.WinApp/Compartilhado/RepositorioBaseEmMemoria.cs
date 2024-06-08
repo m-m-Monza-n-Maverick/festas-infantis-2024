@@ -23,10 +23,10 @@
         }
         public bool Excluir(int id) => registros.Remove(SelecionarPorId(id));
 
-
         public List<T> SelecionarTodos() => registros;
         public T SelecionarPorId(int id) => registros.Find(x => x.Id == id);
         public int PegarId() => contadorId;
         public bool Existe(int id) => registros.Any(x => x.Id == id);
+        public void Atualizar() { }
     }
 }

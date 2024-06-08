@@ -63,6 +63,10 @@ namespace FestasInfantis.WinApp.Compartilhado
             return true;
         }
 
+        public void Atualizar()
+        {
+            SerializarRegistros();
+        }
 
         public List<T> SelecionarTodos() => registros;
         public T SelecionarPorId(int id) => registros.Find(x => x.Id == id);
