@@ -98,7 +98,7 @@ namespace FestasInfantis.WinFormsApp.ModuloCliente
 
             if (SemSeleção(clienteSelecionado)) return;
 
-            TelaPrincipalForm.Instancia.AtualizaLblTipoCadastro(clienteSelecionado.Nome);
+            TelaPrincipalForm.Instancia.AtualizarLblTipoCadastro(clienteSelecionado.Nome);
 
             tabelaAlugueisDoCliente.AtualizarRegistros(clienteSelecionado.Alugueis);
         }
