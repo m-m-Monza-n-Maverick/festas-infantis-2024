@@ -15,7 +15,6 @@ namespace FestasInfantis.WinApp
         IRepositorioItem repositorioItem;
         IRepositorioCliente repositorioCliente;
         IRepositorioAluguel repositorioAluguel;
-
         public static TelaPrincipalForm Instancia { get; private set; }
         public TelaPrincipalForm()
         {
@@ -48,9 +47,18 @@ namespace FestasInfantis.WinApp
 
         #region Botões
         private void btnAdicionar_Click(object sender, EventArgs e)
-            => controlador.Adicionar();
+        {
+            controlador.Adicionar();
+            repositorioCliente.Atualizar();
+        }
         private void btnEditar_Click(object sender, EventArgs e)
-            => controlador.Editar();
+        { 
+            controlador.Editar();
+            repositorioItem.Atualizar();
+            repositorioAluguel.Atualizar();
+            repositorioTema.Atualizar();
+            repositorioCliente.Atualizar();
+        }
         private void btnExcluir_Click(object sender, EventArgs e)
             => controlador.Excluir();
         private void btnConfigurarDescontos_Click(object sender, EventArgs e)
@@ -61,7 +69,10 @@ namespace FestasInfantis.WinApp
         private void btnConcluirAluguel_Click(object sender, EventArgs e)
         {
             if (controlador is IControladorConcluivel controladorConcluivel)
+            {
                 controladorConcluivel.ConcluirAluguel();
+                repositorioCliente.Atualizar();
+            }
         }
         private void btnVisualizarAlugueis_Click(object sender, EventArgs e)
         {

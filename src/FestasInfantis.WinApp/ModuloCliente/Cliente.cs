@@ -9,20 +9,25 @@ namespace FestasInfantis.WinApp
         public string Nome { get; set; } 
         public string Telefone { get; set; } 
         public string CPF { get; set; } 
-        public int NumDeAlugueis { get; set; } = 0;
+        public int AlugueisConcluidos 
+        {
+            get
+            {
+                //if (Alugueis.Count == 0) return 0;
+                return Alugueis.FindAll(x => x.Concluido).Count;
+            }
+            set { }
+        }
         public List<Aluguel> Alugueis { get; set; } = [];
 
-        public Cliente()
-        {
-            
-        }
-
+        public Cliente() { }
         public Cliente(string nome, string telefone, string cPF)
         {
             Nome = nome;
             Telefone = telefone;
             CPF = cPF;
         }
+
         public override List<string> Validar()
         {
 

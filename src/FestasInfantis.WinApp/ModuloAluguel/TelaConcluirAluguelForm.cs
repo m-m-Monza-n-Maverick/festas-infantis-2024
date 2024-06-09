@@ -39,7 +39,6 @@
         private void btnGravar_Click(object sender, EventArgs e)
         {
             aluguel.Concluido = true;
-            aluguel.Cliente.NumDeAlugueis++;
             aluguel.DataPagam = DateTime.Now;
         }
     }

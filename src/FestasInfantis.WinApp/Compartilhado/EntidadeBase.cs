@@ -18,11 +18,6 @@
             if (string.IsNullOrEmpty(campoTestado.ToString()))
                 erros.Add($"\nO campo \"{mostraCampo}\" é obrigatório. Tente novamente ");
         }
-        protected void VerificaNulo(ref List<string> erros, decimal campoTestado, string mostraCampo)
-        {
-            if (string.IsNullOrEmpty(campoTestado.ToString()) || campoTestado == 0)
-                erros.Add($"\nO campo \"{mostraCampo}\" é obrigatório. Tente novamente ");
-        }
         protected void VerificaNulo(ref List<string> erros, DateTime campoTestado, string mostraCampo)
         {
             if (string.IsNullOrEmpty(campoTestado.ToString()))

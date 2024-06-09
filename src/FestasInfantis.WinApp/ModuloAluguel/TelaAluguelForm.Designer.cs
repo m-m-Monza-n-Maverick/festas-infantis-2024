@@ -52,7 +52,7 @@
             groupBox3 = new GroupBox();
             toolStrip1 = new ToolStrip();
             btnAdicionar = new ToolStripButton();
-            toolStripLabel1 = new ToolStripLabel();
+            btnCalcular = new ToolStripLabel();
             txtValorPendente = new TextBox();
             label17 = new Label();
             txtTemaComDesconto = new TextBox();
@@ -127,11 +127,11 @@
             // cmbEstado
             // 
             cmbEstado.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cmbEstado.FormattingEnabled = true;
             cmbEstado.Location = new Point(320, 40);
             cmbEstado.Name = "cmbEstado";
             cmbEstado.Size = new Size(81, 23);
             cmbEstado.TabIndex = 4;
+            cmbEstado.KeyPress += cmbEstado_KeyPress;
             // 
             // txtNumero
             // 
@@ -339,7 +339,7 @@
             // toolStrip1
             // 
             toolStrip1.AutoSize = false;
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnAdicionar, toolStripLabel1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnAdicionar, btnCalcular });
             toolStrip1.Location = new Point(3, 23);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(401, 40);
@@ -361,14 +361,14 @@
             btnAdicionar.Text = "Calcular";
             btnAdicionar.Click += btnAdicionar_Click;
             // 
-            // toolStripLabel1
+            // btnCalcular
             // 
-            toolStripLabel1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            toolStripLabel1.ForeColor = SystemColors.ControlDarkDark;
-            toolStripLabel1.Name = "toolStripLabel1";
-            toolStripLabel1.Size = new Size(55, 37);
-            toolStripLabel1.Text = "Calcular";
-            toolStripLabel1.Click += toolStripLabel1_Click;
+            btnCalcular.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCalcular.ForeColor = SystemColors.ControlDarkDark;
+            btnCalcular.Name = "btnCalcular";
+            btnCalcular.Size = new Size(55, 37);
+            btnCalcular.Text = "Calcular";
+            btnCalcular.Click += btnCalcular_Click;
             // 
             // txtValorPendente
             // 
@@ -547,7 +547,7 @@
             btnGravar.TabIndex = 9;
             btnGravar.Text = "Gravar";
             btnGravar.UseVisualStyleBackColor = true;
-            btnGravar.Click += btnGravar_Click;
+            btnGravar.Click += btnGravar_Click_1;
             // 
             // btnCancelar
             // 
@@ -637,6 +637,6 @@
         private MaskedTextBox mskHoraFim;
         private ToolStrip toolStrip1;
         private ToolStripButton btnAdicionar;
-        private ToolStripLabel toolStripLabel1;
+        private ToolStripLabel btnCalcular;
     }
 }

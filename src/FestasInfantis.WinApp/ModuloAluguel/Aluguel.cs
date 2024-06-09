@@ -75,5 +75,10 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             else if (campoTestado.Nome == "")
                 erros.Add("\nÉ necessário informar um \"Tema\". Tente novamente ");
         }
+        protected void VerificaNulo(ref List<string> erros, decimal campoTestado, string mostraCampo)
+        {
+            if (string.IsNullOrEmpty(campoTestado.ToString()) || campoTestado == 0)
+                erros.Add($"\nO campo \"{mostraCampo}\" é obrigatório. Tente novamente ");
+        }
     }
 }

@@ -25,12 +25,6 @@ namespace FestasInfantis.WinApp.ModuloTema
 
             Tema novoTema = telaTema.Tema;
 
-            foreach(Item item in novoTema.Itens)
-            {
-                item.Tema = novoTema;
-                repositorioItem.Editar(item.Id, item);
-            }
-
             RealizaAcao(
                 () => repositorioTema.Cadastrar(novoTema),
                 novoTema, "criado");
