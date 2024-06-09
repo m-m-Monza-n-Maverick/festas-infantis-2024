@@ -43,13 +43,11 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
             Aluguel novoAluguel = telaAluguel.Aluguel;
 
-            novoAluguel.PorcentDesconto = novoAluguel.Cliente.NumDeAlugueis * repositorioAluguel.PorcentDesconto;
+            AdicionarAluguelDoCliente(novoAluguel);
 
             RealizarAcao(
                 () => repositorioAluguel.Cadastrar(novoAluguel),
                 novoAluguel, "criado");
-
-            AdicionarAluguelDoCliente(novoAluguel);
 
             id++;
         }
@@ -59,8 +57,6 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             Aluguel aluguelSelecionado = repositorioAluguel.SelecionarPorId(idSelecionado);
 
             if (SemSeleção(aluguelSelecionado) || AluguelConcluido(aluguelSelecionado)) return;
-
-            RemoverAluguelDoCliente(idSelecionado, aluguelSelecionado);
 
             TelaAluguelForm telaAluguel = new(idSelecionado, repositorioAluguel.PorcentDesconto, repositorioAluguel.PorcentMaxDesconto);
 
@@ -75,14 +71,14 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
             Aluguel aluguelEditado = telaAluguel.Aluguel;
 
-            aluguelEditado.PorcentDesconto = aluguelEditado.Cliente.NumDeAlugueis * repositorioAluguel.PorcentDesconto;
             aluguelEditado.Id = idSelecionado;
+
+            RemoverAluguelDoCliente(aluguelSelecionado);
+            AdicionarAluguelDoCliente(aluguelEditado);
 
             RealizarAcao(
                 () => repositorioAluguel.Editar(aluguelSelecionado.Id, aluguelEditado),
                 aluguelEditado, "editado");
-
-            AdicionarAluguelDoCliente(aluguelEditado);
         }
         public override void Excluir()
         {
@@ -94,7 +90,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
             if (!DesejaRealmenteExcluir(aluguelSelecionado)) return;
 
-            RemoverAluguelDoCliente(idSelecionado, aluguelSelecionado);
+            RemoverAluguelDoCliente(aluguelSelecionado);
 
             RealizarAcao(
                 () => repositorioAluguel.Excluir(aluguelSelecionado.Id),
@@ -129,9 +125,10 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             int idSelecionado = tabelaAlugueis.ObterRegistroSelecionado();
             Aluguel aluguelSelecionado = repositorioAluguel.SelecionarPorId(idSelecionado);
 
-            if (SemSeleção(aluguelSelecionado)) return;
+            RemoverAluguelDoCliente(aluguelSelecionado);
+            AdicionarAluguelDoCliente(aluguelSelecionado);
 
-            RemoverAluguelDoCliente(idSelecionado, aluguelSelecionado);
+            if (SemSeleção(aluguelSelecionado)) return;
 
             TelaConcluirAluguelForm telaAluguel = new(aluguelSelecionado);
 
@@ -146,8 +143,6 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             RealizarAcao(
                 () => repositorioAluguel.Editar(aluguelSelecionado.Id, aluguelSelecionado),
                 aluguelSelecionado, "concluído");
-
-            AdicionarAluguelDoCliente(aluguelSelecionado);
         }
         public void ConfigurarDescontos()
         {
@@ -163,7 +158,6 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             AtualizarDesconto();
         }
 
-
         #region Auxiliares
         public override UserControl ObterListagem()
         {
@@ -176,7 +170,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
         {
             foreach (Aluguel aluguel in repositorioAluguel.SelecionarTodos())
             {
-                decimal desconto = aluguel.Cliente.NumDeAlugueis * repositorioAluguel.PorcentDesconto;
+                decimal desconto = aluguel.Cliente.AlugueisConcluidos * repositorioAluguel.PorcentDesconto;
 
                 if (desconto > repositorioAluguel.PorcentMaxDesconto) desconto = repositorioAluguel.PorcentMaxDesconto;
 
@@ -242,22 +236,17 @@ namespace FestasInfantis.WinApp.ModuloAluguel
             List<Cliente> clientesCadastrados = repositorioCliente.SelecionarTodos();
             telaAluguel.CarregarClientes(clientesCadastrados);
         }
-        private void AdicionarAluguelDoCliente(Aluguel aluguel)
+        private void AdicionarAluguelDoCliente(Aluguel aluguel) => aluguel.Cliente.Alugueis.Add(aluguel);
+        private void RemoverAluguelDoCliente(Aluguel aluguelSelecionado)
         {
-            aluguel.Cliente.Alugueis.Add(aluguel);
-            repositorioCliente.Editar(aluguel.Cliente.Id, aluguel.Cliente);
-        }
-        private void RemoverAluguelDoCliente(int idSelecionado, Aluguel aluguelSelecionado)
-        {
-            List<Aluguel> lista = aluguelSelecionado.Cliente.Alugueis;
-
-            foreach (Aluguel aluguel in lista)
-                if (aluguel.Id == idSelecionado)
+            foreach (Aluguel aluguel in aluguelSelecionado.Cliente.Alugueis)
+            {
+                if (aluguel.Id == aluguelSelecionado.Id)
                 {
-                    aluguelSelecionado.Cliente.Alugueis.Remove(aluguel);
-                    repositorioCliente.Editar(aluguelSelecionado.Cliente.Id, aluguelSelecionado.Cliente);
-                    return;
+                    aluguel.Cliente.Alugueis.Remove(aluguel);
+                    return; 
                 }
+            }
         }
         #endregion
 
