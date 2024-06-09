@@ -31,7 +31,7 @@ namespace FestasInfantis.WinApp
         }
 
         public void AtualizarRodape(string texto) => statusLabelPrincipal.Text = texto;
-        public void AtualizaLblTipoCadastro(string cliente) => lblTipoCadastro.Text = "Visualizando os alugueis do cliente: " + cliente;
+        public void AtualizarLblTipoCadastro(string cliente) => lblTipoCadastro.Text = "Visualizando os alugueis do cliente: " + cliente;
 
 
         #region Seleção de módulo
@@ -52,19 +52,22 @@ namespace FestasInfantis.WinApp
             repositorioCliente.Atualizar();
         }
         private void btnEditar_Click(object sender, EventArgs e)
-        { 
+        {
             controlador.Editar();
-            repositorioItem.Atualizar();
-            repositorioAluguel.Atualizar();
-            repositorioTema.Atualizar();
-            repositorioCliente.Atualizar();
+            AtualizarModulosParalelos();
         }
         private void btnExcluir_Click(object sender, EventArgs e)
-            => controlador.Excluir();
+        {
+            controlador.Excluir();
+            AtualizarModulosParalelos();
+        }
         private void btnConfigurarDescontos_Click(object sender, EventArgs e)
         {
             if (controlador is IControladorDesconto controladorDesconto)
+            {
                 controladorDesconto.ConfigurarDescontos();
+                repositorioAluguel.Atualizar();
+            }
         }
         private void btnConcluirAluguel_Click(object sender, EventArgs e)
         {
@@ -162,6 +165,13 @@ namespace FestasInfantis.WinApp
             listagemContato.Dock = DockStyle.Fill;
             pnlRegistros.Controls.Clear();
             pnlRegistros.Controls.Add(listagemContato);
+        }
+        private void AtualizarModulosParalelos()
+        {
+            repositorioItem.Atualizar();
+            repositorioAluguel.Atualizar();
+            repositorioTema.Atualizar();
+            repositorioCliente.Atualizar();
         }
         #endregion
     }
