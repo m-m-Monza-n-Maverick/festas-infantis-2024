@@ -11,6 +11,8 @@ namespace FestasInfantis.WinApp
     {
         ControladorBase controlador;
 
+        ContextoDados contexto;
+
         IRepositorioTema repositorioTema;
         IRepositorioItem repositorioItem;
         IRepositorioCliente repositorioCliente;
@@ -22,10 +24,11 @@ namespace FestasInfantis.WinApp
 
             lblTipoCadastro.Text = string.Empty;
 
-            repositorioTema = new RepositorioTemaEmArquivo();
-            repositorioItem = new RepositorioItemEmArquivo();
-            repositorioCliente = new RepositorioClienteEmArquivo();
-            repositorioAluguel = new RepositorioAluguelEmArquivo();
+            contexto = new(carregarDados : true);
+            repositorioTema = new RepositorioTemaEmArquivo(contexto);
+            repositorioItem = new RepositorioItemEmArquivo(contexto);
+            repositorioCliente = new RepositorioClienteEmArquivo(contexto);
+            repositorioAluguel = new RepositorioAluguelEmArquivo(contexto);
 
             Instancia = this;
         }
@@ -47,35 +50,21 @@ namespace FestasInfantis.WinApp
 
         #region Botões
         private void btnAdicionar_Click(object sender, EventArgs e)
-        {
-            controlador.Adicionar();
-            repositorioCliente.Atualizar();
-        }
+            => controlador.Adicionar();
         private void btnEditar_Click(object sender, EventArgs e)
-        {
-            controlador.Editar();
-            AtualizarModulosParalelos();
-        }
+            => controlador.Editar();
         private void btnExcluir_Click(object sender, EventArgs e)
-        {
-            controlador.Excluir();
-            AtualizarModulosParalelos();
-        }
+            => controlador.Excluir();
+
         private void btnConfigurarDescontos_Click(object sender, EventArgs e)
         {
             if (controlador is IControladorDesconto controladorDesconto)
-            {
                 controladorDesconto.ConfigurarDescontos();
-                repositorioAluguel.Atualizar();
-            }
         }
         private void btnConcluirAluguel_Click(object sender, EventArgs e)
         {
             if (controlador is IControladorConcluivel controladorConcluivel)
-            {
                 controladorConcluivel.ConcluirAluguel();
-                repositorioCliente.Atualizar();
-            }
         }
         private void btnVisualizarAlugueis_Click(object sender, EventArgs e)
         {
@@ -165,13 +154,6 @@ namespace FestasInfantis.WinApp
             listagemContato.Dock = DockStyle.Fill;
             pnlRegistros.Controls.Clear();
             pnlRegistros.Controls.Add(listagemContato);
-        }
-        private void AtualizarModulosParalelos()
-        {
-            repositorioItem.Atualizar();
-            repositorioAluguel.Atualizar();
-            repositorioTema.Atualizar();
-            repositorioCliente.Atualizar();
         }
         #endregion
     }

@@ -39,12 +39,12 @@ namespace FestasInfantis.WinApp.ModuloCliente
             char[] telefone = c.Telefone.ToCharArray();
             string ddd = "", parte1 = "", parte2 = "";
 
-/*            for (int i = 0; i < 11; i++)
+            for (int i = 0; i < 11; i++)
             {
                 if (i < 2) ddd += telefone[i];
                 else if (i < 7) parte1 += telefone[i];
                 else parte2 += telefone[i];
-            }*/
+            }
 
             return $"({ddd}){parte1}-{parte2}";
         }
@@ -53,13 +53,13 @@ namespace FestasInfantis.WinApp.ModuloCliente
             char[] cpf = c.CPF.ToCharArray();
             string parte1 = "", parte2 = "", parte3 = "", parte4 = "";
 
-/*            for (int i = 0; i < 11; i++)
+            for (int i = 0; i < 11; i++)
             {
                 if (i < 3) parte1 += cpf[i];
                 else if (i < 6) parte2 += cpf[i];
                 else if (i < 9) parte3 += cpf[i];
                 else parte4 += cpf[i];
-            }*/
+            }
 
             return $"{parte1}.{parte2}.{parte3}-{parte4}";
         }

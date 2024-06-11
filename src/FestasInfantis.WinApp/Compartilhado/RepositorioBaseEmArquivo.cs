@@ -4,38 +4,30 @@ using System.Text.Json.Serialization;
 
 namespace FestasInfantis.WinApp.Compartilhado
 {
-    internal class RepositorioBaseEmArquivo<T> where T : EntidadeBase
+    internal abstract class RepositorioBaseEmArquivo<T>(ContextoDados contexto) where T : EntidadeBase
     {
         protected int contadorId //Baseado no Id do último item cadastrado
         {
             get
             {
                 if (backupId != 0) return backupId;
-                if (registros.Count != 0) return registros.Last().Id + 1;
+                if (ObterRegistros().Count != 0) return ObterRegistros().Last().Id + 1;
                 return 1;
             }
             set { }
         }
         protected int backupId; //Caso o último registro seja excluído
-        protected List<T> registros = [];
-        private string caminho = string.Empty;
-
-        public RepositorioBaseEmArquivo(string nomeArquivo)
-        {
-            caminho = $"C:\\temp\\FestasInfantis\\{nomeArquivo}";
-
-            registros = DeserializarRegistros();
-        }
-
+        protected abstract List<T> ObterRegistros();
+        protected ContextoDados contexto = contexto;
 
         public void Cadastrar(T novoRegistro)
         {
             novoRegistro.Id = contadorId++;
             backupId = 0;
 
-            registros.Add(novoRegistro);
+            ObterRegistros().Add(novoRegistro);
 
-            SerializarRegistros();
+            contexto.Gravar();
         }
         public bool Editar(int id, T novaEntidade)
         {
@@ -46,70 +38,27 @@ namespace FestasInfantis.WinApp.Compartilhado
 
             registro.AtualizarRegistro(novaEntidade);
 
-            SerializarRegistros();
+            contexto.Gravar();
 
             return true;
         }
         public bool Excluir(int id)
         {
-            if (SelecionarPorId(id) == registros.Last()) backupId = contadorId;
+            if (SelecionarPorId(id) == ObterRegistros().Last()) backupId = contadorId;
 
-            bool conseguiuExcluir = registros.Remove(SelecionarPorId(id));
+            bool conseguiuExcluir = ObterRegistros().Remove(SelecionarPorId(id));
 
             if (!conseguiuExcluir) return false;
 
-            SerializarRegistros();
+            contexto.Gravar();
 
             return true;
         }
 
-        public void Atualizar()
-        {
-            SerializarRegistros();
-        }
 
-        public List<T> SelecionarTodos() => registros;
-        public T SelecionarPorId(int id) => registros.Find(x => x.Id == id);
+        public List<T> SelecionarTodos() => ObterRegistros();
+        public T SelecionarPorId(int id) => ObterRegistros().Find(x => x.Id == id);
         public int PegarId() => contadorId;
-        public bool Existe(int id) => registros.Any(x => x.Id == id);
-
-        #region JSON
-        protected void SerializarRegistros()
-        {
-            FileInfo arquivo = new(caminho);
-
-            arquivo.Directory.Create();
-
-            JsonSerializerOptions options = new()
-            {
-                WriteIndented = true,
-                ReferenceHandler = ReferenceHandler.Preserve,
-                PropertyNameCaseInsensitive = true
-            };
-
-            byte[] resgistrosEmBytes = JsonSerializer.SerializeToUtf8Bytes(registros, options);
-
-            File.WriteAllBytes(caminho, resgistrosEmBytes);
-        }
-        protected List<T> DeserializarRegistros()
-        {
-            FileInfo arquivo = new FileInfo(caminho);
-
-            if (!arquivo.Exists)
-                return new List<T>();
-
-            byte[] registrosEmBytes = File.ReadAllBytes(caminho);
-
-            JsonSerializerOptions options = new JsonSerializerOptions()
-            {
-                ReferenceHandler = ReferenceHandler.Preserve,
-                PropertyNameCaseInsensitive = true
-            };
-
-            List<T> registros = JsonSerializer.Deserialize<List<T>>(registrosEmBytes, options);
-
-            return registros;
-        }
-        #endregion
+        public bool Existe(int id) => ObterRegistros().Any(x => x.Id == id);
     }
 }

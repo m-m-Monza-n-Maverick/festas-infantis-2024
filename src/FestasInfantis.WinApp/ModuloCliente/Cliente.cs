@@ -11,11 +11,7 @@ namespace FestasInfantis.WinApp
         public string CPF { get; set; } 
         public int AlugueisConcluidos 
         {
-            get
-            {
-                //if (Alugueis.Count == 0) return 0;
-                return Alugueis.FindAll(x => x.Concluido).Count;
-            }
+            get => Alugueis.FindAll(x => x.Concluido).Count;
             set { }
         }
         public List<Aluguel> Alugueis { get; set; } = [];

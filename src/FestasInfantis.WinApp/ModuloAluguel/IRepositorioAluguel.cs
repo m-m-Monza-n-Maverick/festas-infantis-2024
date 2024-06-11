@@ -15,6 +15,5 @@
         int PegarId();
         List<Aluguel> SelecionarCompromissosPendentes();
         List<Aluguel> SelecionarCompromissosConcluidos();
-        void Atualizar();
     }
 }
