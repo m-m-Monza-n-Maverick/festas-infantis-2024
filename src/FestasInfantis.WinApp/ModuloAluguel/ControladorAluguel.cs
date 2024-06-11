@@ -118,7 +118,7 @@ namespace FestasInfantis.WinApp.ModuloAluguel
 
             tabelaAlugueis.AtualizarRegistros(alugueisFiltrados);
 
-            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {alugueisFiltrados.Count} registros");
+            TelaPrincipalForm.Instancia.AtualizarRodape($"Visualizando {alugueisFiltrados.Count} ObterRegistros()");
         }
         public void ConcluirAluguel()
         {
